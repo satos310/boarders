@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
 
-Things you may want to cover:
+人生1着目のウェアーを買う際や、初めてそのスポーツに触れる時、そのスポーツにたのしみを見い出している時に、その業界の「イケてる」を知ることができたら更に楽しみの枠も広げられると感じたため。
 
-* Ruby version
 
-* System dependencies
+### ターゲットユーザ
 
-* Configuration
+- 既にボードスポーツを楽しんでいるユーザー
+- これからボードスポーツをやろうとしている・やり始めたばかりの初心者ユーザー
+- スポーツ場所を提供している雪山や海水浴場、パークなどの環境
+- ウェアーやボードなどを販売しているメーカー
 
-* Database creation
 
-* Database initialization
+### 主な利用シーン
 
-* How to run the test suite
+- スポーツ用品の購入を検討している時
+- 近場のスポットやオススメスポットを検索したい時
+- ユーザーのニーズを知りたい時
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+## 設計書
 
-* ...
+実装機能リスト（スプレッドシート）
+- https://docs.google.com/spreadsheets/d/1_GsedMdaGriwQFtuzLwrl_ktcXS8ii2Aw4qpMYSEDaA/edit?usp=sharing
