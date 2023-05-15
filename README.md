@@ -21,6 +21,11 @@
 
 
 ## 設計書
+- 実装機能リスト
+https://docs.google.com/spreadsheets/d/1_GsedMdaGriwQFtuzLwrl_ktcXS8ii2Aw4qpMYSEDaA/edit?usp=sharing
 
-実装機能リスト（スプレッドシート）
-- https://docs.google.com/spreadsheets/d/1_GsedMdaGriwQFtuzLwrl_ktcXS8ii2Aw4qpMYSEDaA/edit?usp=sharing
+- ER図
+https://drive.google.com/file/d/10P74ba2wC7n7lnaY7wZ6cWWwaNXs6zi8/view?usp=sharing
+
+- テーブル定義書
+https://docs.google.com/spreadsheets/d/1rlmHZLIj6_Zx6d9o7NLPsBA6lAaoaVYzUSWjrylGJhY/edit?usp=sharing
