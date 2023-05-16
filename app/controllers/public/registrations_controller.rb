@@ -68,6 +68,4 @@ class Public::RegistrationsController < Devise::RegistrationsController
     user_path(resource)
   end
   
-  private
-  
 end

@@ -1,26 +1,22 @@
-<h2>Log in</h2>
+<h2>LOGGGGGO</h2>
+<p>登録してみんなの<br>「イケてる」を見つけよう</p>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <!-- １つのフォームでユーザーネーム / メールアドレスを認識させたい -->
+    <%= f.email_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム / メールアドレス" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "ログインする" %>
   </div>
 <% end %>
 
-<%= render "public/shared/links" %>
+<p>
+  アカウントをお持ちではないですか？
+  <%= link_to "登録する" %>
+</p>
