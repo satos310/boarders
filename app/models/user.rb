@@ -4,5 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validate :name, presence: true, uniqueness: true, length: { minimum: 3}
+  # ユーザー名が3文字未満の場合はエラーを出すようにしたいが
+  # TerminalでArugument Error（引数エラー）が発生する　↓
+
+  # validates :name, presence: true, length: { minimum: 3 }
 end
