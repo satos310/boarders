@@ -24,9 +24,11 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
     resources :users, only: [:show, :edit, :update]
+    resources :pickups, only: [:index]
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update] do
-      resources :pickups, only: [:index, :create, :destroy]
+      resources :pickups, only: [:create, :destroy]
     end
     resources :follows, only: [:create, :destroy]
+    resources :notifications, only: [:index]
   end
 end
