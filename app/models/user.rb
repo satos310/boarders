@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :pickups, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  has_one_attached :user_image
+  has_one_attached :image
 
   def get_item_image(width, height)
     unless item_image.attached?

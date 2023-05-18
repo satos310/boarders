@@ -1,2 +1,45 @@
-<h1>Public::Reviews#new</h1>
-<p>Find me in app/views/public/reviews/new.html.erb</p>
+<!-- public/review/new レビュー投稿ページ -->
+
+<div class="container">
+  <div class="row">
+    <div>
+      <%= form_with model: @review, url: reviews_path, method: :post do |f| %>
+        <table>
+          <tr>
+            <th>レビュー種別</th>
+            <td>
+              <%= f.radio_button :review_type, true %>
+              <%= f.label :review_type_true, "ロケーション" %>
+              <%= f.radio_button :review_type, false %>
+              <%= f.label :review_type_false, "アイテム" %>
+            </td>
+          </tr>
+
+          <tr>
+            <th>写真を追加（プレビュー表示させたい）</th>
+            <!-- multiple: trueで画像の複数投稿を許可している -->
+            <td><%= f.file_field :item_image, accept: "image/*", multiple: true, class: "form-control-file user-image" %></td>
+          </tr>
+
+          <tr>
+            <th>タイトル</th>
+            <td><%= f.text_field :title, autofocus: true, class: 'form-control title' %></td>
+          </tr>
+
+          <tr>
+            <th>レビュー</th>
+            <td><%= f.text_area :body, class: 'form-control body' %></td>
+          </tr>
+
+          <tr>
+            <th>評価</th>
+            <td>
+
+            </td>
+          </tr>
+        </table>
+
+      <% end %>
+    </div>
+  </div>
+</div>

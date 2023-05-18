@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_161050) do
     t.string "title", default: "", null: false
     t.string "body", default: "", null: false
     t.integer "star", null: false
+    t.boolean "review_type", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_id"], name: "index_reviews_on_genre_id"

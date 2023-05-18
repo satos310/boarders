@@ -6,6 +6,7 @@ class CreateReviews < ActiveRecord::Migration[6.1]
       t.string :title,        null: false, default: ""
       t.string :body,         null: false, default: ""
       t.integer :star,        null: false, default: ""
+      t.boolean :review_type, null: false, default: true
       t.timestamps
     end
   end
