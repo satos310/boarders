@@ -19,4 +19,8 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+// viewからjQueryを読み込めるようにするため追加
 window.$ = window.jQuery = require('jquery');
+
+// Ratyを読み込む
+require('./jquery.raty')

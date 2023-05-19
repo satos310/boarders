@@ -25,8 +25,9 @@ Rails.application.routes.draw do
     patch 'customers/withdraw'
     resources :users, only: [:show, :edit, :update]
     resources :pickups, only: [:index]
-    resources :reviews, only: [:new, :create, :index, :show, :edit, :update] do
+    resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :pickups, only: [:create, :destroy]
+      resources :stars, only: [:create, :destroy]
     end
     resources :follows, only: [:create, :destroy]
     resources :notifications, only: [:index]

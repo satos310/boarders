@@ -10,7 +10,7 @@ environment.plugins.prepend(
   })
 )
 
-
+// raty.jsを使用できるように設定
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
     $: 'jquery/src/jquery',
