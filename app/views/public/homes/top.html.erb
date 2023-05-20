@@ -4,7 +4,10 @@
   <div class="row">
     <div>
       <% @reviews.each do |review| %>
-        <%= image_tag  %>
+        <!-- get_user_imageにundefined methodが出る -->
+        <%= image_tag @user.get_user_image(100,100) %>
+        <%= @users.name %>
+        <%=  %>
       <% end %>
     </div>
   </div>

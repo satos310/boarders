@@ -103,26 +103,28 @@ ActiveRecord::Schema.define(version: 2023_05_19_142543) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "genre_id", null: false
     t.string "title", default: "", null: false
     t.string "body", default: "", null: false
-    t.float "star", default: 0.0, null: false
     t.boolean "review_type", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["genre_id"], name: "index_reviews_on_genre_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "stars", force: :cascade do |t|
+    t.integer "review_id", null: false
+    t.string "name", default: "", null: false
+    t.float "score", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_stars_on_review_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "introduction", default: "", null: false
     t.integer "gender", default: 0, null: false
     t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
@@ -146,6 +148,6 @@ ActiveRecord::Schema.define(version: 2023_05_19_142543) do
   add_foreign_key "pickups", "reviews"
   add_foreign_key "pickups", "users"
   add_foreign_key "relationships", "followers"
-  add_foreign_key "reviews", "genres"
   add_foreign_key "reviews", "users"
+  add_foreign_key "stars", "reviews"
 end

@@ -1,12 +1,21 @@
 class Public::ReviewsController < ApplicationController
   def new
     @review = Review.new
-    # 評価機能はまだ未実装
+    # raty.js用のフォーム
+    @star = Star.new
   end
 
   def create
-    @review = Review.new
-    if @review.save
+    @review = Review.new(review_params)
+    if @review.save!
+      # @review.star.create(name: "ゲレンデ", score: params[:star][:star2])
+      @review.stars.create({
+        name: "ゲレンデ", score: params[:star][:star],
+        name: "コストパフォーマンス", score: params[:star][:star2],
+        name: "接客・サービス", score: params[:star][:star3],
+        name: "設備の充実", score: params[:star][:star4],
+        name: "周辺設備", score: params[:star][:star5],
+      })
       redirect_to homes_top_path
     else
       render :new
@@ -18,13 +27,10 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    # raty.js用のフォーム
-    @star = Star.new
     # raty..jsの平均値
     @star_avg = Star.where(review_id: params[:id]).average(:star)
     # すでに評価済みかの確認フラグ
     @star_flg = Star.find(use_id: current_user_id, review_id: params[:id])
-
   end
 
   def edit
@@ -49,7 +55,11 @@ class Public::ReviewsController < ApplicationController
 
   def review_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:title, :bodty, :image)
+    params.require(:review).permit(:title, :body, :review_image)
           .merge(user_id: current_user.id)
   end
+
+  # def star_params
+  #   params.require(:star).permit(:name, :score)
+  # end
 end

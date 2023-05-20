@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Boarders</title>
+    <title>FourBoarders</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -22,7 +22,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-
+            
             <div class="collapse navbar-collapse", id="navbarNavDrop wn">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -42,14 +42,14 @@
                 </li>
               </ul>
             </div>
-
+            
           <!-- /user ログイン時のheader -->
           <% elsif user_signed_in? %>
             <%= link_to "FourBoarders", homes_top_path, class: 'navbar-brand font-weight-bold' %>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-
+            
             <div class="collapse navbar-collapse", id="navbarNavDrop wn">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">

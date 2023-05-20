@@ -560,7 +560,9 @@ class Raty {
 
     if (this.opt.half) {
       const size = this._getWidth();
-      const percent = parseFloat((evt.pageX - icon.offsetLeft) / size);
+        const rect = icon.getBoundingClientRect();
+        const elemleft = rect.left + window.pageXOffset;
+        const percent = parseFloat((evt.pageX - elemleft) / size);
 
       score = score - 1 + percent;
     }

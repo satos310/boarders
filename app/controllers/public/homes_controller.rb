@@ -3,7 +3,7 @@ class Public::HomesController < ApplicationController
     @users = User.all
     @reviews = Review.all
   end
-
+  
   def about
   end
 end

@@ -15,12 +15,24 @@ import "../stylesheets/application"
 
 import '@fortawesome/fontawesome-free/js/all'
 
+// Ratyを読み込む
+// require('./jquery.raty')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
 // viewからjQueryを読み込めるようにするため追加
-window.$ = window.jQuery = require('jquery');
+// window.$ = window.jQuery = require('jquery');
 
 // Ratyを読み込む
-require('./jquery.raty')
+// require('./jquery.raty')
+// $('#star').raty()
+
+// Ratyを読み込む
+import Raty from "./raty.js"
+window.raty = function(elem,opt){
+    var raty =  new Raty(elem,opt);
+    raty.init();
+    return raty;
+}

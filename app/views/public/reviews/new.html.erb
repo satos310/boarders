@@ -33,7 +33,72 @@
 
           <tr>
             <th>評価</th>
-            <td></td>
+            <td>
+              ゲレンデ<div id="post_raty"></div>
+              <script>
+                var elem = document.getElementById('post_raty');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    scoreName: 'star[star]',
+                  };
+                  raty(elem,opt);
+              </script>
+
+              コストパフォーマンス<div id="post_raty2"></div>
+              <script>
+                var elem = document.getElementById('post_raty2');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    scoreName: 'star[star2]',
+                  };
+                  raty(elem,opt);
+              </script>
+
+              接客・サービス<div id="post_raty3"></div>
+              <script>
+                var elem = document.getElementById('post_raty3');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    scoreName: 'star[star3]',
+                  };
+                  raty(elem,opt);
+              </script>
+
+              設備の充実<div id="post_raty4"></div>
+              <script>
+                var elem = document.getElementById('post_raty4');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    scoreName: 'star[star4]',
+                  };
+                  raty(elem,opt);
+              </script>
+
+              周辺設備<div id="post_raty5"></div>
+              <script>
+                var elem = document.getElementById('post_raty5');
+                var opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    half: true,
+                    scoreName: 'star[star5]',
+                  };
+                  raty(elem,opt);
+              </script>
+            </td>
           </tr>
         </table>
 
