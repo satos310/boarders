@@ -11,8 +11,9 @@
           <%= review.user.name %>
         </div>
 
+        <!-- 投稿画像が表示されない（ユーザー画像が取得されている？） -->
         <%= image_tag review.get_review_image(200,200) %>
-        
+
         <!-- レビューの平均を出したい -->
         <!-- 参考サイト：https://qiita.com/kcl215/items/e226ac58d14360fd1b8e -->
         <div class="starrate">
@@ -33,12 +34,12 @@
             });
           </script>
         </div>
-        
+
         <!-- レビューの平均を出したい2 -->
         <div class="average-review-rating" data-score=<%= review.stars.average(:all_score) %>></div>
         　<%=@all_score %>：<%= review.stars.average(:all_score).to_f.round(1) %>
         </div>
-        
+
         <%= review.title %>
         <%= review.body %>
       <% end %>
