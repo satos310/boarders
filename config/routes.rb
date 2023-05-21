@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update]
   end
-
+  
   scope module: :public do
     get 'homes/top'
     get 'homes/about'
