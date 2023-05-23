@@ -18,11 +18,12 @@
         <!-- 参考サイト：https://qiita.com/kcl215/items/e226ac58d14360fd1b8e -->
         <div class="starrate">
           <%# 平均点を算出し、round関数で切り上げ %>
-          <%=@all_score %>：<%= review.stars.average(:all_score).to_f.round(1) %>
+          <%=@all_score %>：<%= review.stars.average(:score).to_f.round(1) %>
           <%# 評価数を星に置き換える %>
-          <div class="average-review-rating" data-score=<%= review.stars.average(:all_score) %>></div>
+          <div class="average-review-rating" data-score=<%= review.stars.average(:score) %>></div>
           <%# jquery発火イベントを記載%>
           <script>
+            $('#star').empty();
             $('.average-review-rating').raty({
               readOnly: true,
               starOn: "<%= asset_path('star-on.png') %>",
@@ -35,12 +36,7 @@
           </script>
         </div>
 
-        <!-- レビューの平均を出したい2 -->
-        <div class="average-review-rating" data-score=<%= review.stars.average(:all_score) %>></div>
-        　<%=@all_score %>：<%= review.stars.average(:all_score).to_f.round(1) %>
-        </div>
-
-        <%= review.title %>
+        <%= review.title %><br>
         <%= review.body %>
       <% end %>
     </div>

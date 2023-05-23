@@ -4,7 +4,6 @@ class CreateStars < ActiveRecord::Migration[6.1]
       t.references :review, null: false, foreign_key: true
       t.string :name,      null: false, default: ""
       t.float :score,      null: false, default: 0.0
-      t.float :all_score,  null: false, default: 0.0
       t.timestamps
     end
   end

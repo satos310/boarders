@@ -115,7 +115,6 @@ ActiveRecord::Schema.define(version: 2023_05_19_142543) do
     t.integer "review_id", null: false
     t.string "name", default: "", null: false
     t.float "score", default: 0.0, null: false
-    t.float "all_score", default: 0.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["review_id"], name: "index_stars_on_review_id"
