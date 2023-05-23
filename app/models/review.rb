@@ -6,6 +6,11 @@ class Review < ApplicationRecord
 
   has_one_attached :review_image
 
+  # 平均点を算出し、round関数で切り上げ
+  def average_rating
+    stars.average(:score).to_f.round(1)
+  end
+
   def get_user_image(width, height)
     unless user_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

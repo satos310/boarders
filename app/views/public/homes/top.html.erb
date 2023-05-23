@@ -18,9 +18,8 @@
         <!-- 参考サイト：https://qiita.com/kcl215/items/e226ac58d14360fd1b8e -->
         <div class="starrate">
           <%# 平均点を算出し、round関数で切り上げ %>
-          <%=@all_score %>：<%= review.stars.average(:score).to_f.round(1) %>
           <%# 評価数を星に置き換える %>
-          <div class="average-review-rating" data-score=<%= review.stars.average(:score) %>></div>
+          <div class="average-review-rating" data-score=<%= review.average_rating %>></div>
           <%# jquery発火イベントを記載%>
           <script>
             $('#star').empty();
