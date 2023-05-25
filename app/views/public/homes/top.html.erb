@@ -5,8 +5,7 @@
     <div>
       <% @reviews.each do |review| %>
         <div>
-          <!-- get_user_imageにundefined methodが出る -->
-          <!-- 複数形に対して画像の -->
+          <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
           <%= image_tag review.user.get_user_image(100,100) %>
           <%= review.user.name %>
         </div>
@@ -19,19 +18,10 @@
         <div class="starrate">
           <%# 平均点を算出し、round関数で切り上げ %>
           <%# 評価数を星に置き換える %>
-          <div class="average-review-rating" data-score=<%= review.average_rating %>></div>
+          <div id="average-review-rating" data-score=<%= review.average_rating %>></div>
           <%# jquery発火イベントを記載%>
           <script>
-            $('#star').empty();
-            $('.average-review-rating').raty({
-              readOnly: true,
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              score: function() {
-                return $(this).attr('data-score')
-              }
-            });
+
           </script>
         </div>
 
@@ -41,3 +31,26 @@
     </div>
   </div>
 </div>
+
+<script>
+var elem = document.getElementById('average-review-rating');
+var opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+  };
+  raty(elem,opt);
+</script>
+
+<script>
+  $('#star').empty();
+  $('.average-review-rating').raty({
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

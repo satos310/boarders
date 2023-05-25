@@ -7,15 +7,17 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    @review.stars.build(name: "ゲレンデ", score: params[:star][:star])
+    @review.stars.build(name: "コストパフォーマンス", score: params[:star][:star2])
+    @review.stars.build(name: "接客・サービス", score: params[:star][:star3])
+    @review.stars.build(name: "設備の充実", score: params[:star][:star4])
+    @review.stars.build(name: "周辺設備", score: params[:star][:star5])
+
+
     if @review.save
       # @review.star.create(name: "ゲレンデ", score: params[:star][:star2])
-      @review.stars.create(
-        { name: "ゲレンデ", score: params[:star][:star] },
-        { name: "コストパフォーマンス", score: params[:star][:star2] },
-        { name: "接客・サービス", score: params[:star][:star3] },
-        { name: "設備の充実", score: params[:star][:star4] },
-        { name: "周辺設備", score: params[:star][:star5] },
-      )
+      
+     
       redirect_to homes_top_path
     else
       render :new
