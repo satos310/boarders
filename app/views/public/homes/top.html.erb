@@ -6,23 +6,22 @@
       <% @reviews.each do |review| %>
         <div>
           <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-          <%= image_tag review.user.get_user_image(100,100) %>
+          <%= link_to user_path(review.user.id) do %>
+            <%= image_tag review.user.get_user_image(100,100) %>
+          <% end %>
           <%= review.user.name %>
         </div>
 
-        <!-- 投稿画像が表示されない（ユーザー画像が取得されている？） -->
-        <%= image_tag review.get_review_image(200,200) %>
+        <%= link_to review_path(review.id) do %>
+          <%= image_tag review.get_review_image(200,200) %>
+        <% end %>
 
         <!-- レビューの平均を出したい -->
         <!-- 参考サイト：https://qiita.com/kcl215/items/e226ac58d14360fd1b8e -->
         <div class="starrate">
-          <%# 平均点を算出し、round関数で切り上げ %>
           <%# 評価数を星に置き換える %>
-          <div id="average-review-rating" data-score=<%= review.average_rating %>></div>
-          <%# jquery発火イベントを記載%>
-          <script>
-
-          </script>
+          <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
+          <%=  review.average_rating %>
         </div>
 
         <%= review.title %><br>
@@ -32,25 +31,32 @@
   </div>
 </div>
 
+<%# jquery発火イベントを記載%>
 <script>
-var elem = document.getElementById('average-review-rating');
-var opt = {
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-  };
-  raty(elem,opt);
+  <% @reviews.each do |review| %>
+    var elem = document.getElementById('average-review-rating-<%=review.id%>');
+    var opt = {
+        readOnly: true,
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: function() {
+           return $(this).attr('data-score')
+        }
+    }
+    raty(elem, opt);
+  <% end %>
 </script>
 
-<script>
-  $('#star').empty();
-  $('.average-review-rating').raty({
-    readOnly: true,
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    score: function() {
-      return $(this).attr('data-score')
-    }
-  });
-</script>
+// <script>
+//   $('#star').empty();
+//   $('.average-review-rating').raty({
+//     readOnly: true,
+//     starOn: "<%#= asset_path('star-on.png') %>",
+//     starOff: "<%#= asset_path('star-off.png') %>",
+//     starHalf: "<%#= asset_path('star-half.png') %>",
+//     score: function() {
+//       return $(this).attr('data-score')
+//     }
+//   });
+// </script>

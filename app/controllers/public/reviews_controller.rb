@@ -13,11 +13,8 @@ class Public::ReviewsController < ApplicationController
     @review.stars.build(name: "設備の充実", score: params[:star][:star4])
     @review.stars.build(name: "周辺設備", score: params[:star][:star5])
 
-
     if @review.save
       # @review.star.create(name: "ゲレンデ", score: params[:star][:star2])
-      
-     
       redirect_to homes_top_path
     else
       render :new
