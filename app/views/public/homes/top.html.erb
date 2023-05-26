@@ -16,12 +16,11 @@
           <%= image_tag review.get_review_image(200,200) %>
         <% end %>
 
-        <!-- レビューの平均を出したい -->
-        <!-- 参考サイト：https://qiita.com/kcl215/items/e226ac58d14360fd1b8e -->
+        <!-- レビューの平均 -->
         <div class="starrate">
           <%# 評価数を星に置き換える %>
           <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
-          <%=  review.average_rating %>
+          <%= review.average_rating %>
         </div>
 
         <%= review.title %><br>

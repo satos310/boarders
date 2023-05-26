@@ -33,75 +33,16 @@
 
           <tr>
             <th>評価</th>
-            <td>
-              ゲレンデ<div id="post_raty"></div>
-              <script>
-                var elem = document.getElementById('post_raty');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star]',
-                  };
-                  raty(elem,opt);
-              </script>
-
-              コストパフォーマンス<div id="post_raty2"></div>
-              <script>
-                var elem = document.getElementById('post_raty2');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star2]',
-                  };
-                  raty(elem,opt);
-              </script>
-
-              接客・サービス<div id="post_raty3"></div>
-              <script>
-                var elem = document.getElementById('post_raty3');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star3]',
-                  };
-                  raty(elem,opt);
-              </script>
-
-              設備の充実<div id="post_raty4"></div>
-              <script>
-                var elem = document.getElementById('post_raty4');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star4]',
-                  };
-                  raty(elem,opt);
-              </script>
-
-              周辺設備<div id="post_raty5"></div>
-              <script>
-                var elem = document.getElementById('post_raty5');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star5]',
-                  };
-                  raty(elem,opt);
-              </script>
-            </td>
+            <% @review.stars.each do |star| %>
+              <td>
+                <%= star.name %>
+                <%# 評価数を星に置き換える %>
+                <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
+                <%=  star.score %>
+              </td>
+            <% end %>
           </tr>
         </table>
-
         <div>
           <%= link_to "戻る", :back, class: 'btn' %>
           <%= f.submit "投稿する", class: 'btn' %>
@@ -110,3 +51,34 @@
     </div>
   </div>
 </div>
+
+<script>
+  <% @review.stars.each do |star| %>
+    var elem = document.getElementById('review-rating-<%=star.id%>');
+    var opt = {
+        readOnly: true,
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: function() {
+           return $(this).attr('data-score')
+        }
+    }
+    raty(elem, opt);
+  <% end %>
+</script>
+
+<!-- レビュー表示案1 -->
+<!--<div id="star-rate<%#= star.id %>"></div>-->
+<!--script>
+//   $('#star-rate<%#= star.id %>').empty();
+//   $('#star-rate<%# star.id %>').raty({
+//     size : 36,
+//     starOff : '<%#= asset_path('star-off.png') %>',
+//     starOn : '<%#= asset_path('star-on.png') %>',
+//     starHalf: '<%#= asset_path('star-half.png') %>',
+//     half : true,
+//     readOnly: true,
+//     score: <%#= star.score %>
+//   });
+// </script>
