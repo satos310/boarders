@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update]
   end
-  
+
   scope module: :public do
     get 'homes/top'
     get 'homes/about'
@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
+      get '/review/hashtag/:name' => 'reviews#hashtag'
+      get '/ewview/hashtag' => 'reviews#hashtag'
     end
     resources :follows, only: [:create, :destroy]
     resources :notifications, only: [:index]

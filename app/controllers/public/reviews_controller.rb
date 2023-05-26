@@ -27,9 +27,9 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     # raty..jsの平均値
-    @star_avg = Star.where(review_id: params[:id]).average(:star)
+    # @star_avg = Star.where(review_id: params[:id]).average(:star)
     # すでに評価済みかの確認フラグ
-    @star_flg = Star.find(use_id: current_user_id, review_id: params[:id])
+    # @star_flg = Star.find(use_id: current_user_id, review_id: params[:id])
   end
 
   def edit
@@ -54,7 +54,7 @@ class Public::ReviewsController < ApplicationController
 
   def review_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:title, :body, :review_image)
+    params.require(:review).permit(:title, :body, :review_image, :star)
           .merge(user_id: current_user.id)
   end
 
