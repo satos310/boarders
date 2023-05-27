@@ -3,51 +3,32 @@
 <div class="container">
   <div class="row">
     <div>
-      <%= form_with model: @review, url: reviews_path, method: :post do |f| %>
-        <table>
-          <tr>
-            <th>レビュー種別</th>
-            <td>
-              <%= f.radio_button :review_type, true %>
-              <%= f.label :review_type_true, "ロケーション" %>
-              <%= f.radio_button :review_type, false %>
-              <%= f.label :review_type_false, "アイテム" %>
-            </td>
-          </tr>
+      <div>
+        <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+        <%= link_to user_path(@review.user.id) do %>
+          <%= image_tag @review.user.get_user_image(100,100) %>
+        <% end %>
+        <%= @review.user.name %>
+      </div>
 
-          <tr>
-            <th>写真を追加（プレビュー表示させたい）</th>
-            <!-- multiple: trueで画像の複数投稿を許可している -->
-            <td><%= f.file_field :review_image, accept: "image/*", class: "form-control-file user-image" %></td>
-          </tr>
+      <div>
+        <%= link_to review_path(@review.id) do %>
+          <%= image_tag @review.get_review_image(200,200) %>
+        <% end %>
+      </div>
 
-          <tr>
-            <th>タイトル</th>
-            <td><%= f.text_field :title, autofocus: true, class: 'form-control title' %></td>
-          </tr>
+      <div>
+        <%= @review.title %><br>
+        <%= @review.body %>
+      </div>
 
-          <tr>
-            <th>レビュー</th>
-            <td><%= f.text_area :body, class: 'form-control body' %></td>
-          </tr>
-
-          <tr>
-            <th>評価</th>
-            <% @review.stars.each do |star| %>
-              <td>
-                <%= star.name %>
-                <%# 評価数を星に置き換える %>
-                <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
-                <%=  star.score %>
-              </td>
-            <% end %>
-          </tr>
-        </table>
-        <div>
-          <%= link_to "戻る", :back, class: 'btn' %>
-          <%= f.submit "投稿する", class: 'btn' %>
-        </div>
+      <% @review.stars.each do |star| %>
+        <%= star.name %>
+        <%# 評価数を星に置き換える %>
+        <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
+        <%=  star.score %>
       <% end %>
+
     </div>
   </div>
 </div>
