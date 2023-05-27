@@ -1,4 +1,17 @@
 class Public::ReviewsController < ApplicationController
+
+  def hashtag
+    if params[:name].nil?
+      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.reviews.count}
+    else
+      name = params[:name]
+      name = name.downcase
+      @hashtag = Hashtag.find_by(hashname: name)
+      @review = @hashtag.reviews
+      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.reviews.count}
+    end
+  end
+
   def new
     @review = Review.new
     # raty.js用のフォーム
@@ -54,7 +67,7 @@ class Public::ReviewsController < ApplicationController
 
   def review_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:title, :body, :review_image, :star)
+    params.require(:review).permit(:title, :body, :review_image, :star, :hashbody, reviewss: [], hashtag_ids: [])
           .merge(user_id: current_user.id)
   end
 

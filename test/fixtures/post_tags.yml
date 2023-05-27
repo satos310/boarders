@@ -2,8 +2,8 @@
 
 one:
   post: one
-  hashtag: one
+  tag: one
 
 two:
   post: two
-  hashtag: two
+  tag: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_26_153057) do
+ActiveRecord::Schema.define(version: 2023_05_27_113723) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,20 +62,10 @@ ActiveRecord::Schema.define(version: 2023_05_26_153057) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "hashtag_relations", force: :cascade do |t|
-    t.integer "review_id", null: false
-    t.integer "hashtag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashtag_id"], name: "index_hashtag_relations_on_hashtag_id"
-    t.index ["review_id"], name: "index_hashtag_relations_on_review_id"
-  end
-
   create_table "hashtags", force: :cascade do |t|
     t.string "hashname"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -99,6 +89,16 @@ ActiveRecord::Schema.define(version: 2023_05_26_153057) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["review_id"], name: "index_pickups_on_review_id"
     t.index ["user_id"], name: "index_pickups_on_user_id"
+  end
+
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "review_id", null: false
+    t.integer "hashtag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hashtag_id"], name: "index_post_tags_on_hashtag_id"
+    t.index ["review_id", "hashtag_id"], name: "index_post_tags_on_review_id_and_hashtag_id", unique: true
+    t.index ["review_id"], name: "index_post_tags_on_review_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -148,14 +148,14 @@ ActiveRecord::Schema.define(version: 2023_05_26_153057) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "reviews"
   add_foreign_key "comments", "users"
-  add_foreign_key "hashtag_relations", "hashtags"
-  add_foreign_key "hashtag_relations", "reviews"
   add_foreign_key "notifications", "action_types"
   add_foreign_key "notifications", "subject_ids"
   add_foreign_key "notifications", "subject_types"
   add_foreign_key "notifications", "users"
   add_foreign_key "pickups", "reviews"
   add_foreign_key "pickups", "users"
+  add_foreign_key "post_tags", "hashtags"
+  add_foreign_key "post_tags", "reviews"
   add_foreign_key "relationships", "followers"
   add_foreign_key "reviews", "users"
   add_foreign_key "stars", "reviews"

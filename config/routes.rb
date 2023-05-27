@@ -29,8 +29,9 @@ Rails.application.routes.draw do
       resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
       get '/review/hashtag/:name' => 'reviews#hashtag'
-      get '/ewview/hashtag' => 'reviews#hashtag'
+      get '/review/hashtag' => 'reviews#hashtag'
     end
+    get "search_tag"=>"reviews#search_tag"
     resources :follows, only: [:create, :destroy]
     resources :notifications, only: [:index]
   end

@@ -28,7 +28,10 @@
 
           <tr>
             <th>レビュー</th>
-            <td><%= f.text_area :body, class: 'form-control body' %></td>
+            <td>
+              <%= f.text_area :body, class: 'form-control body' %>
+              <%= f.text_area :hashbody, class: 'form-control body' %>
+            </td>
           </tr>
 
           <tr>

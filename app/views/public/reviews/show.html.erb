@@ -20,6 +20,7 @@
       <div>
         <%= @review.title %><br>
         <%= @review.body %>
+        <%= render_with_hashtags(@photo.caption) %>
       </div>
 
       <% @review.stars.each do |star| %>
