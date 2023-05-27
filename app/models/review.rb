@@ -3,33 +3,29 @@ class Review < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :pickups, dependent: :destroy
   has_many :stars, dependent: :destroy
-  has_many :hashtag_relations, dependent: :destroy
-  has_many :hashtags, through: :hashtag_posts
+  has_many :post_tags, dependent: :destroy
+  has_many :hashtags, through: :post_tags
 
   has_one_attached :review_image
 
-  # DBへのコミット直前に実施する
-  after_create do
-    review = Review.find_by(id: id)
-    # hashbodyに打ち込まれたハッシュタグを検出
-    hashtags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-    hashtags.uniq.map do |hashtag|
-        # ハッシュタグは先頭の#を外した上で保存
-      tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))
-      review.hashtags << tag
-    end
-  end
+  def save_hashtag(sent_hashtags)
+    # タグが存在していれば、タグの名前を配列として全て取得
+    current_hashtags = self.hashtags.pluck(:name) unless self.hashtags.nil?
+    # 現在取得したタグから送られてきたタグを除いてoldtagとする
+    old_hashtags = current_hashtags - sent_hashtags
+    # 送信されてきたタグから現在存在するタグを除いたタグをnewとする
+    new_hashtags = sent_hashtags - current_hashtags
 
-  # 更新アクション
-  before_update do
-    review = Review.find_by(id: id)
-    review.hashtags.clear
-    hashtags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
-    hashtags.uniq.map do |hashtag|
-      tag = Hashtag.find_or_create_by(hashname: hashtag.downcase.delete('#'))
-      review.hashtags << tag
+    # 古いタグを消す
+    old_hashtags.each do |old|
+      self.hashtags.delete　Tag.find_by(name: old)
     end
-  end
+
+    # 新しいタグを保存
+    new_hashtags.each do |new|
+      new_review_hashtag = Hashtag.find_or_create_by(name: new)
+      self.hashtags << new_review_hashtag
+   end
 
   # 平均点を算出し、round関数で切り上げ
   def average_rating

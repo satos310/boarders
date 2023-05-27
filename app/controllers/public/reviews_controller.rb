@@ -25,9 +25,11 @@ class Public::ReviewsController < ApplicationController
     @review.stars.build(name: "接客・サービス", score: params[:star][:star3])
     @review.stars.build(name: "設備の充実", score: params[:star][:star4])
     @review.stars.build(name: "周辺設備", score: params[:star][:star5])
+    @review.user_id = current_user.id
+    hashtag_list=params[:review][:name].split(',')
 
     if @review.save
-      # @review.star.create(name: "ゲレンデ", score: params[:star][:star2])
+      @review.save_hashtag(hashtag_list)
       redirect_to homes_top_path
     else
       render :new
