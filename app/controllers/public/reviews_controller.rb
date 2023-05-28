@@ -12,6 +12,15 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+ def search_tag
+    #検索結果画面でもタグ一覧表示
+    @hashtags = Hashtag.all
+　  #検索されたタグを受け取る
+    @hashtag = Hashtag.find(params[:hashtag_id])
+　  #検索されたタグに紐づく投稿を表示
+    @reviews = @hashtag.reviews.page(params[:page]).per(10)
+  end
+
   def new
     @review = Review.new
     # raty.js用のフォーム
@@ -41,20 +50,20 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    # raty..jsの平均値
-    # @star_avg = Star.where(review_id: params[:id]).average(:star)
-    # すでに評価済みかの確認フラグ
-    # @star_flg = Star.find(use_id: current_user_id, review_id: params[:id])
+    @post_tags = @review.tags
   end
 
   def edit
     @review = Review.find(params[:id])
+    @tag_list = @review.hashtags.pluck(:name).join(',')
   end
 
   def update
     @review = Review.find(params[:id])
+    tasg_list = params[:review][:name].split(',')
     if @review.update(review_params)
-      redirect_to review_path(@review)
+      @review.save_tag(tag_list)
+      redirect_to review_path(@review.id)
     else
       render :edit
     end

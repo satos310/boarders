@@ -29,7 +29,12 @@
         <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
         <%=  star.score %>
       <% end %>
+    </div>
+  </div>
 
+  <div class="row">
+    <div>
+      <%= link_to "編集する", edit_review(@review.id) %>
     </div>
   </div>
 </div>
