@@ -20,7 +20,11 @@
       <div>
         <%= @review.title %><br>
         <%= @review.body %>
-        <%= render_with_hashtags(@photo.caption) %>
+        <% @hashtags.each do |tag| %>
+          <%= link_to tag.name, search_tag_path(tag_id: hashtag.id)%>
+          <!-- タグに関する投稿数の取得 -->
+          <%="(#{tag.reviews.count})" %>
+        <% end %>
       </div>
 
       <% @review.stars.each do |star| %>

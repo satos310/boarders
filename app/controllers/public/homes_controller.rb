@@ -1,10 +1,20 @@
 class Public::HomesController < ApplicationController
+
+ def search_tag
+    #検索結果画面でもタグ一覧表示
+    @hashtags = Hashtag.all
+　  #検索されたタグを受け取る
+    @hashtag = Hashtag.find(params[:hashtag_id])
+　  #検索されたタグに紐づく投稿を表示
+    @reviews = @hashtag.reviews.page(params[:page]).per(10)
+  end
+
   def top
     @users = User.all
     @reviews = Review.page(params[:page]).per(10)
     @stars = Star.all
     @all_rating = '総合評価'
-    @hashtag_list=Tag.all
+    @hashtag_list = Hashtag.all
   end
 
   def about

@@ -60,10 +60,17 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
-    tasg_list = params[:review][:name].split(',')
+    # 入力されたタグを受け取る
+    tag_list = params[:review][:name].split(',')
     if @review.update(review_params)
-      @review.save_tag(tag_list)
-      redirect_to review_path(@review.id)
+      # このreview_idに紐づいていたタグを@oldに入れる
+      @old_relations = PostTag.where(review_id: @review.id)
+      # それらを取り出し、消す。消し終わる
+      @old_relations.each do |relation|
+        relation.delete
+      end  
+       @review.save_tag(tag_list)
+      redirect_to post_path(@post.id), notice: '更新完了しました:)'
     else
       render :edit
     end

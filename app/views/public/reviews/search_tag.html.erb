@@ -1,7 +1,18 @@
-<!-- public/homes トップページ（投稿レビュー一覧） -->
+<!-- public/search_tag タグ検索結果の表示（投稿レビュー一覧） -->
 
 <div class="container">
+  <h5>タグが<%=@hashtag.name%>の投稿一覧</h5>
+
   <div class="row">
+    <!-- タグリスト -->
+    <div>
+      <% @hashtags.each do |tag|%>
+        <%= link_to tag.name, search_tag_path(hashtag_id: list.id) %>
+        <%= "(#{list.reviews.count})" %>
+      <% end %>
+    </div>
+
+    <!-- 投稿 -->
     <div>
       <% @reviews.each do |review| %>
         <div>
@@ -25,8 +36,8 @@
 
         <%= review.title %><br>
         <%= review.body %>
-        <% @review.each do |review| %>
-          <i class="fas fa-tag"><%= review.hashtags.map(&:name).join(', ') %></i>
+        <% .each do |post| %>
+          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
         <% end %>
 
         <!--タグリスト-->
@@ -55,17 +66,3 @@
     raty(elem, opt);
   <% end %>
 </script>
-
-<!-- raty.js ver.3の記述方法（今回はver.4.1.1を使用） -->
-// <script>
-//   $('#star').empty();
-//   $('.average-review-rating').raty({
-//     readOnly: true,
-//     starOn: "<%#= asset_path('star-on.png') %>",
-//     starOff: "<%#= asset_path('star-off.png') %>",
-//     starHalf: "<%#= asset_path('star-half.png') %>",
-//     score: function() {
-//       return $(this).attr('data-score')
-//     }
-//   });
-// </script>
