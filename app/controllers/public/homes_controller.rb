@@ -1,9 +1,10 @@
 class Public::HomesController < ApplicationController
   def top
     @users = User.all
-    @reviews = Review.all
+    @reviews = Review.page(params[:page]).per(10)
     @stars = Star.all
     @all_rating = '総合評価'
+    @hashtag_list=Tag.all
   end
 
   def about

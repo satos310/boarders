@@ -59,3 +59,9 @@ gem 'devise'
 
 # Active_strage導入
 gem 'image_processing', '~> 1.2'
+
+# kaminari
+gem 'kaminari'
+
+# FontAwesomeの導入
+gem 'font-awesome-sass'

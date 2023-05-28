@@ -25,7 +25,9 @@
 
         <%= review.title %><br>
         <%= review.body %>
-        <%= render_with_hashtags(review.hashname) %>
+        <% .each do |post| %>
+          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
+        <% end %>
       <% end %>
     </div>
   </div>

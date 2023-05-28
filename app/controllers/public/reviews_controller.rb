@@ -69,7 +69,7 @@ class Public::ReviewsController < ApplicationController
 
   def review_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:title, :body, :review_image, :star, :hashbody, reviewss: [], hashtag_ids: [])
+    params.require(:review).permit(:title, :body, :review_image, :star, :hastag)
           .merge(user_id: current_user.id)
   end
 

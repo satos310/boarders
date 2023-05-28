@@ -25,7 +25,8 @@ class Review < ApplicationRecord
     new_hashtags.each do |new|
       new_review_hashtag = Hashtag.find_or_create_by(name: new)
       self.hashtags << new_review_hashtag
-   end
+    end
+  end
 
   # 平均点を算出し、round関数で切り上げ
   def average_rating
