@@ -23,18 +23,16 @@
           <%= review.average_rating %>
         </div>
 
-        <%= review.title %><br>
-        <%= review.body %>
-        <% @review.each do |review| %>
-          <i class="fas fa-tag"><%= review.hashtags.map(&:name).join(', ') %></i>
-        <% end %>
+        <p><%= review.title %></p>
+        <p><%= review.body %></p>
+        <div>
+          <!--タグリスト-->
+          <% review.hashtags.each do |list|%>
+            <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
+          <% end %>
+        </div>
 
-        <!--タグリスト-->
-        <% @hashtag_list.each do |list|%>
-          <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
-          <%= "(#{list.reviews.count})" %>
-        <% end %>
-      <% end %>
+      <% end %><!-- review.eachのend -->
     </div>
   </div>
 </div>

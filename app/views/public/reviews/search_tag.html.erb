@@ -4,14 +4,6 @@
   <h5>タグが<%=@hashtag.name%>の投稿一覧</h5>
 
   <div class="row">
-    <!-- タグリスト -->
-    <div>
-      <% @hashtags.each do |tag|%>
-        <%= link_to tag.name, search_tag_path(hashtag_id: list.id) %>
-        <%= "(#{list.reviews.count})" %>
-      <% end %>
-    </div>
-
     <!-- 投稿 -->
     <div>
       <% @reviews.each do |review| %>
@@ -36,14 +28,10 @@
 
         <%= review.title %><br>
         <%= review.body %>
-        <% .each do |post| %>
-          <i class="fas fa-tag"><%= post.tags.map(&:name).join(', ') %></i>
-        <% end %>
 
         <!--タグリスト-->
-        <% @hashtag_list.each do |list|%>
-          <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
-          <%= "(#{list.reviews.count})" %>
+        <% review.hashtags.each do |list|%>
+          <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
         <% end %>
       <% end %>
     </div>
