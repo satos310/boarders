@@ -1,6 +1,15 @@
 <!-- public/homes トップページ（投稿レビュー一覧） -->
 
 <div class="container">
+  <div classS="row">
+    <div>
+      <%= form_with url: reviews_path, local: true, method: :get do |f| %>
+        <%= f.text_field :keyword %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row">
     <div>
       <% @reviews.each do |review| %>
@@ -40,6 +49,7 @@
 <%# jquery発火イベントを記載%>
 <script>
   <% @reviews.each do |review| %>
+    $('#average-review-rating-<%= review.id %>').empty();
     var elem = document.getElementById('average-review-rating-<%=review.id%>');
     var opt = {
         readOnly: true,

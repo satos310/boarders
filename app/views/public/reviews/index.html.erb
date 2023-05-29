@@ -1,2 +1,69 @@
-<h1>Public::Reviews#index</h1>
-<p>Find me in app/views/public/reviews/index.html.erb</p>
+<!-- 検索結果画面 review/index -->
+
+<div class="container">
+  <div classS="row">
+    <div class="search_form">
+      <%= form_with url: reviews_path, local: true, method: :get, class: "search-form" do |f| %>
+        <%= f.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
+        <%= f.submit "検索", class: "search-btn" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2>検索結果 "<%= @keyword %>"</h2>
+  </div>
+
+  <div class="row">
+    <div>
+      <% @reviews.each do |review| %>
+        <div>
+          <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+          <%= link_to user_path(review.user.id) do %>
+            <%= image_tag review.user.get_user_image(100,100) %>
+          <% end %>
+          <%= review.user.name %>
+        </div>
+
+        <%= link_to review_path(review.id) do %>
+          <%= image_tag review.get_review_image(200,200) %>
+        <% end %>
+
+        <!-- レビューの平均 -->
+        <div class="starrate">
+          <%# 評価数を星に置き換える %>
+          <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
+          <%= review.average_rating %>
+        </div>
+
+        <p><%= review.title %></p>
+        <p><%= review.body %></p>
+        <div>
+          <!--タグリスト-->
+          <% review.hashtags.each do |list|%>
+            <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
+          <% end %>
+        </div>
+
+      <% end %><!-- review.eachのend -->
+    </div>
+  </div>
+</div>
+
+<%# jquery発火イベントを記載%>
+<script>
+  <% @reviews.each do |review| %>
+    $('#average-review-rating-<%= review.id %>').empty();
+    var elem = document.getElementById('average-review-rating-<%=review.id%>');
+    var opt = {
+        readOnly: true,
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: function() {
+           return $(this).attr('data-score')
+        }
+    }
+    raty(elem, opt);
+  <% end %>
+</script>

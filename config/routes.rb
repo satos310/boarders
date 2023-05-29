@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       resources :stars, only: [:create, :destroy]
       get '/review/hashtag/:name' => 'reviews#hashtag'
       get '/review/hashtag' => 'reviews#hashtag'
+      collection do
+        get 'search'
+      end
     end
     get "search_tag"=>"reviews#search_tag"
     resources :follows, only: [:create, :destroy]

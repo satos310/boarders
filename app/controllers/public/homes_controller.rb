@@ -1,4 +1,12 @@
 class Public::HomesController < ApplicationController
+  def search
+    if params[:keyword].present?
+      @reviews = Review.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @reviews = Review.all
+    end
+  end
 
  def search_tag
     #検索結果画面でもタグ一覧表示

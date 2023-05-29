@@ -50,6 +50,7 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
+    @reviews = Review.search(params[:keyword])
   end
 
   def show
@@ -65,6 +66,12 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
+    @review.stars.find_by(name: "ゲレンデ").update(score: params[:star][:star])
+    @review.stars.find_by(name: "コストパフォーマンス").update(score: params[:star][:star2])
+    @review.stars.find_by(name: "接客・サービス").update(score: params[:star][:star3])
+    @review.stars.find_by(name: "設備の充実").update(score: params[:star][:star4])
+    @review.stars.find_by(name: "周辺設備").update(score: params[:star][:star5])
+
     # 入力されたタグを受け取る
     tag_list = params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
     if @review.update(review_params)

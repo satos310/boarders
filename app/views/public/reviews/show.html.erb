@@ -43,6 +43,7 @@
 
 <script>
   <% @review.stars.each do |star| %>
+    $('#review-rating-<%= star.id %>').empty();
     var elem = document.getElementById('review-rating-<%=star.id%>');
     var opt = {
         readOnly: true,

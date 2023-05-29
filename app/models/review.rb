@@ -8,6 +8,14 @@ class Review < ApplicationRecord
 
   has_one_attached :review_image
 
+  def self.search(search)
+    if search != ""
+      Review.where(['title LIKE(?) OR body LIKE(?)', "%#{search}%", "%#{search}%"])
+    else
+      Review.includes(:user).order('created_at DESC')
+    end
+  end
+
   def save_hashtag(sent_hashtags)
     # タグが存在していれば、タグの名前を配列として全て取得
     current_hashtags = self.hashtags.pluck(:name) unless self.hashtags.nil?
