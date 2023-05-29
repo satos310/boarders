@@ -11,41 +11,47 @@
   </div>
 
   <div class="row">
-    <h2>検索結果 "<%= @keyword %>"</h2>
+
   </div>
 
   <div class="row">
     <div>
-      <% @reviews.each do |review| %>
-        <div>
-          <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-          <%= link_to user_path(review.user.id) do %>
-            <%= image_tag review.user.get_user_image(100,100) %>
+      <% if @reviews.present? %>
+        <!-- 検索ワードを検索フォーム内に収めたい -->
+        <h3>検索結果 "<%= @keyword %>"</h3>
+
+        <% @reviews.each do |review| %>
+          <div>
+            <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+            <%= link_to user_path(review.user.id) do %>
+              <%= image_tag review.user.get_user_image(100,100) %>
+            <% end %>
+            <%= review.user.name %>
+          </div>
+
+          <%= link_to review_path(review.id) do %>
+            <%= image_tag review.get_review_image(200,200) %>
           <% end %>
-          <%= review.user.name %>
-        </div>
 
-        <%= link_to review_path(review.id) do %>
-          <%= image_tag review.get_review_image(200,200) %>
-        <% end %>
+          <!-- レビューの平均 -->
+          <div class="starrate">
+            <%# 評価数を星に置き換える %>
+            <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
+            <%= review.average_rating %>
+          </div>
 
-        <!-- レビューの平均 -->
-        <div class="starrate">
-          <%# 評価数を星に置き換える %>
-          <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
-          <%= review.average_rating %>
-        </div>
-
-        <p><%= review.title %></p>
-        <p><%= review.body %></p>
-        <div>
-          <!--タグリスト-->
-          <% review.hashtags.each do |list|%>
-            <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
-          <% end %>
-        </div>
-
-      <% end %><!-- review.eachのend -->
+          <p><%= review.title %></p>
+          <p><%= review.body %></p>
+          <div>
+            <!--タグリスト-->
+            <% review.hashtags.each do |list|%>
+              <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
+            <% end %>
+          </div>
+        <% end %><!-- review.eachのend -->
+      <% else %>
+        <h3>検索結果はありません</3>
+      <% end %>
     </div>
   </div>
 </div>
