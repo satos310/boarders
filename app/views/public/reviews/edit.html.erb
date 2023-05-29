@@ -1,20 +1,29 @@
+<!-- public/review/edit 投稿編集画面 -->
+
 <div class="container">
   <div class="row">
-    <dvi>
-      <%= form_with model: @review, url: review_path(@review.current_user.id), method: :patch do |f| %>
-        <% @post_tags.each do |tag| %>
-          <%= tag.name %><% ="(#{tag.reviews.count})" %>
-        <% end %>
+    <div>
+      <h3>投稿を編集</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <%= form_with model: @review, url: review_path(@review.id), method: :patch do |f| %>
+        <div>
+          <%= f.text_field :title, value: @review.title, class: 'form-control' %><br>
+          <%= f.text_area :body, value: @review.body, class: 'form-control' %><br>
+        </div>
 
         <div class="field">
           <%= f.label "タグ (,で区切ると複数タグ登録できます)" %>
-          <%= f.text_field :name, value: @hashtag_list, class:"form-control" %>
+          <%= f.text_field :name, value: @tag_list, class:"form-control" %>
         </div>
 
       　<div class="actions" style="margin:20px 0;">
-          <%= f.submit "投稿", class:"btn btn-outline-primary btn-block" %>
+          <%= f.submit "編集を保存", class:"btn btn-outline-primary btn-block" %>
         </div>
-      <% end %>
-    </dvi>
-  </div>
+      <% end %> <!-- form_withのend -->
+    </div>
+  </div> <!-- /row-->
 </div>

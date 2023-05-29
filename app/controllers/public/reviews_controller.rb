@@ -54,18 +54,19 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    @hashtags = @review.hashtags
+    @hashtags = @review.hashtags.all
   end
 
   def edit
     @review = Review.find(params[:id])
+    @hashtags = @review.hashtags.all
     @tag_list = @review.hashtags.pluck(:name).join(',')
   end
 
   def update
     @review = Review.find(params[:id])
     # 入力されたタグを受け取る
-    tag_list = params[:review][:name].split(',')
+    tag_list = params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
     if @review.update(review_params)
       # このreview_idに紐づいていたタグを@oldに入れる
       @old_relations = PostTag.where(review_id: @review.id)
@@ -73,8 +74,8 @@ class Public::ReviewsController < ApplicationController
       @old_relations.each do |relation|
         relation.delete
       end
-       @review.save_tag(tag_list)
-      redirect_to post_path(@post.id), notice: '更新完了しました:)'
+       @review.save_hashtag(tag_list)
+      redirect_to review_path(@review.id), notice: '更新完了しました:)'
     else
       render :edit
     end

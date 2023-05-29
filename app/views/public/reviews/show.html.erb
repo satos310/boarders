@@ -19,11 +19,9 @@
 
       <div>
         <%= @review.title %><br>
-        <%= @review.body %>
+        <%= @review.body %><br>
         <% @hashtags.each do |tag| %>
-          <%= link_to tag.name, search_tag_path(tag_id: hashtag.id)%>
-          <!-- タグに関する投稿数の取得 -->
-          <%="(#{tag.reviews.count})" %>
+          <%= link_to tag.name, search_tag_path(hashtag_id: tag.id)%>
         <% end %>
       </div>
 
@@ -31,7 +29,7 @@
         <%= star.name %>
         <%# 評価数を星に置き換える %>
         <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
-        <%=  star.score %>
+        <%= star.score %>
       <% end %>
     </div>
   </div>
