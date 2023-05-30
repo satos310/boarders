@@ -1,4 +1,8 @@
 class Public::UsersController < ApplicationController
+  def friends
+    @friends = User.all
+  end
+
   def show
     @user = User.find(params[:id])
   end

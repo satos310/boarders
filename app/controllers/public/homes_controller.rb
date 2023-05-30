@@ -8,7 +8,7 @@ class Public::HomesController < ApplicationController
     end
   end
 
- def search_tag
+  def search_tag
     #検索結果画面でもタグ一覧表示
     @hashtags = Hashtag.all
 　  #検索されたタグを受け取る

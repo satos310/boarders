@@ -102,11 +102,10 @@ ActiveRecord::Schema.define(version: 2023_05_27_113723) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "following_id", null: false
+    t.integer "follower", null: false
+    t.integer "follow_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -156,7 +155,6 @@ ActiveRecord::Schema.define(version: 2023_05_27_113723) do
   add_foreign_key "pickups", "users"
   add_foreign_key "post_tags", "hashtags"
   add_foreign_key "post_tags", "reviews"
-  add_foreign_key "relationships", "followers"
   add_foreign_key "reviews", "users"
   add_foreign_key "stars", "reviews"
 end
