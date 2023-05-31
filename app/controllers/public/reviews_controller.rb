@@ -55,7 +55,6 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @review = Review.find(params[:id])
     @hashtags = @review.hashtags.all
   end

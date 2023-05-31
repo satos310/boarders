@@ -12,21 +12,21 @@ class User < ApplicationRecord
   #follower_id=自分
   #follow_id=相手
  # 自分がフォローしたり、アンフォローしたりするための記述
-  has_many :relationships, class_name: "relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
  # sourceは本当はfollow_idとなっていてカラム名を示している。
  # フォロー一覧を表示するための記述
-  has_many :followings, through: :favorites, source: :follow
+  has_many :followings, through: :relationships, source: :follow
 
-  has_many :reverse_favorites, class_name: "relationship", foreign_key: "follow_id", dependent: :destroy
+  has_many :reverse_relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
  # フォロワー一覧を表示するための記述
   has_many :followers, through: :reverse_relationships, source: :follower
 
   def follow(user_id)
-    favorites.create(follow_id: user_id)
+    relationships.create(follow_id: user_id)
   end
 
   def unfollow(user_id)
-    favorites.find_by(follow_id: user_id).destroy
+    relationships.find_by(follow_id: user_id).destroy
   end
 
   has_one_attached :user_image

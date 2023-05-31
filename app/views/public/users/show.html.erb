@@ -5,7 +5,52 @@
     </div>
 
     <div>
-      <%=  %>
+      <%= @user.name %>
+      <% if @user != current_user %>
+        <% if current_user.following?(@user.id) %>
+          <%= link_to "Unfollow", user_relationships_path(@user.id), method: :delete %>
+        <% else %>
+          <%= link_to "Follow", user_relationships_path(@user.id), method: :post %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div>
+      <p>投稿数：（未作成）<%#= @review.count %></p>
+      <p>フォロー: <%= @user.followings.count %></p>
+      <p>フォロワー: <%= @user.followers.count %></p>
+    </div>
+
+    <div>
+      <p><%= @user.introduction %></p>
     </div>
   </div>
+
+  <div class="row">
+    <div>
+      <% @reviews.each do |review| %>
+        <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+        <%= link_to review_path(review.id) do %>
+          <%= image_tag review.get_review_image(200,200) %>
+        <% end %>
+
+        <!-- レビューの平均 -->
+        <div class="starrate">
+          <%# 評価数を星に置き換える %>
+          <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
+          <%= review.average_rating %>
+        </div>
+
+        <p><%= review.title %></p>
+        <p><%= review.body %></p>
+
+        <div>
+          <!--タグリスト-->
+          <% review.hashtags.each do |list|%>
+            <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
+          <% end %>
+        </div>
+      <% end %><!-- review.eachのend -->
+    </div>
+  </div><!-- /row -->
 </div>
