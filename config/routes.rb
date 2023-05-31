@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'relationships/create'
-  get 'relationships/destroy'
-  get 'relationships/following'
-  get 'relationships/followers'
   devise_for :users, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -28,10 +24,11 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
     resources :users, only: [:show, :edit, :update, :friends] do
+      get 'friends'
       # フォロー機能はuserにネストさせている
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'favorites#followings', as: 'followings'
-      get 'followers' => 'favorites#followers', as: 'followers'
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
     end
 
     resources :pickups, only: [:index]

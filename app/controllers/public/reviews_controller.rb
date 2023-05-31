@@ -12,7 +12,7 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
- def search_tag
+  def search_tag
     #検索結果画面でもタグ一覧表示
     @hashtags = Hashtag.all
     #検索されたタグを受け取る
@@ -55,6 +55,7 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @review = Review.find(params[:id])
     @hashtags = @review.hashtags.all
   end
