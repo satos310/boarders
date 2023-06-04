@@ -20,10 +20,6 @@
           <%= f.text_field :name, value: @tag_list, class:"form-control" %>
         </div>
 
-      　<div class="actions" style="margin:20px 0;">
-          <%= f.submit "編集を保存", class:"btn btn-outline-primary btn-block" %>
-        </div>
-
         <table>
           <tr>
             <th>評価</th>
@@ -95,6 +91,12 @@
             </td>
           </tr>
         </table><!-- 星評価欄の閉じタグ -->
+
+      　<div class="actions" style="margin:20px 0;">
+          <%= f.submit "編集を保存", class: "btn btn-outline-primary btn-block" %>
+          <%= link_to "戻る", :back, class: 'btn btn-outline-dark btn-block' %>
+          <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger btn-block'  %>
+        </div>
       <% end %> <!-- form_withのend -->
     </div><!-- /col -->
   </div> <!-- /row-->

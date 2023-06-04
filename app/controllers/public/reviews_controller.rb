@@ -90,7 +90,8 @@ class Public::ReviewsController < ApplicationController
   end
 
   def destroy
-    Review.find(params[:id]).destroy()
+    @review = Review.find(params[:id])
+    @review.destroy
     redirect_to root_path
   end
 

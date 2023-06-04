@@ -1,10 +1,10 @@
 class Review < ApplicationRecord
   belongs_to :user
-  has_many :comments, dependent: :destroy
-  has_many :pickups, dependent: :destroy
-  has_many :stars, dependent: :destroy
-  has_many :post_tags, dependent: :destroy
-  has_many :hashtags, through: :post_tags
+  has_many :comments,   dependent: :destroy
+  has_many :pickups,    dependent: :destroy
+  has_many :stars,      dependent: :destroy
+  has_many :post_tags,  dependent: :destroy
+  has_many :hashtags,   through: :post_tags
 
   has_one_attached :review_image
 

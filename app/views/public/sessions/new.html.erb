@@ -1,24 +1,36 @@
 <!-- session/new ユーザーログインページ -->
-
-<h2>FourBoarders</h2>
-<p>登録してみんなの<br>「イケてる」を見つけよう</p>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <!-- １つのフォームでユーザーネーム / メールアドレスを認識させたい -->
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム / メールアドレス" %>
+<div class="container">
+  <div class="row">
+    <div>
+      <h2>FourBoarders</h2><br>
+      <p>登録してみんなの<br>「イケてる」を見つけよう</p>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
-  </div>
+  <div="row">
+    <div>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <% if params[:login_failed].present? %>
+          <p class="alert alert-danger">ログインに失敗しました。正しいユーザーネームまたはメールアドレスとパスワードを入力してください。</p>
+        <% end %>
+        <div class="field">
+          <!-- １つのフォームでユーザーネーム / メールアドレスを認識させたい -->
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム / メールアドレス" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "ログインする" %>
-  </div>
-<% end %>
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
+        </div>
 
-<p>
-  アカウントをお持ちではないですか？
-  <%= link_to "登録する", new_user_registration_path  %>
-</p>
+        <div class="actions">
+          <%= f.submit "ログインする" %>
+        </div>
+      <% end %>
+
+      <p>
+        アカウントをお持ちではないですか？
+        <%= link_to "登録する", new_user_registration_path  %>
+      </p>
+    </div>
+  </div>
+</div>

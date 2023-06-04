@@ -10,19 +10,18 @@ class Public::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   # def create
-  #   super
+  #   self.resource = warden.authenticate!(auth_options)
+  #   if resource
+  #     sign_in(resource_name, resource)
+  #     redirect_to homes_top_path
+  #   else
+  #     redirect_to new_user_session_path(login_failed: true)
+  #   end
   # end
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
-  # end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
   def after_sign_in_path_for(resource)
@@ -31,5 +30,16 @@ class Public::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(resource)
     new_user_registration_path
+  end
+
+  # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_in_params
+  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  # end
+
+  protected
+
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password])
   end
 end

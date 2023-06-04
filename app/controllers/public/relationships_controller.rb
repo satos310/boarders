@@ -15,7 +15,7 @@ class Public::RelationshipsController < ApplicationController
   end
 
   # フォローフォロワー一覧処理
-  def following
+  def followings
     user = User.find(params[:user_id])
     @users = user.followings
   end

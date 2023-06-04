@@ -28,6 +28,11 @@ class User < ApplicationRecord
   def unfollow(user_id)
     relationships.find_by(follow_id: user_id).destroy
   end
+  
+  # フォローしているか判定
+  def following?(user)
+    followings.include?(user)
+  end
 
   has_one_attached :user_image
 
