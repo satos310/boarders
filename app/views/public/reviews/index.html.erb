@@ -41,7 +41,7 @@
           <div>
             <!--タグリスト-->
             <% review.hashtags.each do |list|%>
-              <%= link_to list.name, search_tag_path(hashtag_id: list.id) %>
+              <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
             <% end %>
           </div>
         <% end %><!-- review.eachのend -->
