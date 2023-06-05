@@ -13,11 +13,15 @@
       <% @users.each do |user| %>
         <div class="d-flex">
           <div>
-            <%= image_tag user.get_user_image(100,100) %>
+            <%= link_to user_path(@user.id), class: 'text-dark' do %>
+              <%= image_tag user.get_user_image(100,100) %>
+            <% end %>
           </div>
           <div>
-            <p><%= user.name %></p>
-            <p><%= user.introduction %></p>
+            <%= link_to user_path(@user.id), class: 'text-dark' do %>
+              <p><%= user.name %></p>
+              <p><%= user.introduction %></p>
+            <% end %>
           </div>
         </div>
       <% end %>

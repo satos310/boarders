@@ -3,6 +3,7 @@
 <div class="container">
   <div class="row">
     <div>
+      <%= link_to "戻る", :back %>
       <h4><%= @user.name %>のフォロー中</h4>
       <p><%= link_to "フォロワー一覧", user_followers_path(@user.id), class: '' %></p>
     </div>
@@ -13,11 +14,13 @@
       <% @users.each do |user| %>
         <div class="d-flex">
           <div>
-            <%= image_tag user.get_user_image(100,100) %>
+            <%= link_to user_path(user.id), class: 'text-dark' do %>
+              <%= image_tag user.get_user_image(100,100) %>
+            <% end %>
           </div>
           <div>
-            <p><%= user.name %></p>
-            <p><%= user.introduction %></p>
+            <p><%= link_to "#{user.name}", user_path(user.id), class: 'text-dark' %></p>
+            <p><%= link_to "#{user.introduction}", user_path(user.id), class: 'text-dark' %></p>
           </div>
         </div>
       <% end %>
