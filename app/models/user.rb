@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :pickups, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+  # has_many :notifications, dependent: :destroy
 
   #follower_id=自分
   #follow_id=相手

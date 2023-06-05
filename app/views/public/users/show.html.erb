@@ -3,7 +3,7 @@
     <div>
       <%= image_tag @user.get_user_image(100,100) %>
     </div>
-
+    
     <div>
       <%= @user.name %>
       <% if current_user && @user != current_user %>
@@ -14,7 +14,7 @@
         <% end %>
       <% end %>
     </div>
-
+    
     <div>
       <p>投稿数：（未作成）<%#= @review.count %></p>
       <p>フォロー: <%= @user.followings.count %></p>
@@ -25,7 +25,7 @@
       <p><%= @user.introduction %></p>
     </div>
   </div><!-- /row -->
-
+  
   <div class="row">
     <div>
       <% @reviews.each do |review| %>
