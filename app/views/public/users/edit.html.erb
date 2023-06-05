@@ -1,2 +1,36 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4>プロフィールを編集</h4>
+    <% if @user.errors.any? %>
+      <%= @user.errors.count %>errors prohibited this obj from being saved:
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <%= form_with model: @user do |f| %>
+      <div class="form-group">
+        <lavel for="名前">Name</label>
+        <%= f.text_field :name, autofocus: true, id:"name", class: 'form-control name' %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_Image">Image</label>
+        <%= f.file_field :user_image, accept: "image/*", class: "form-control-file user-image" %>
+      </div>
+
+      <div class="form-group">
+        <label for="user_introduction">Introduction</label>
+        <%= f.text_area :introduction, id:"introduction", class: 'form-control introduction' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Update User", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div><!-- /row -->
+</div>

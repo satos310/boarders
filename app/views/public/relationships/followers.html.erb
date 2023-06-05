@@ -1,0 +1,26 @@
+<!-- フォロワー一覧 user/followers -->
+
+<div class="container">
+  <div class="row">
+    <div>
+      <h4><%= @user.name %>のフォロワー</h4>
+      <p><%= link_to "フォロー中一覧", user_followings_path(@user.id), class: '' %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <% @users.each do |user| %>
+        <div class="d-flex">
+          <div>
+            <%= image_tag user.get_user_image(100,100) %>
+          </div>
+          <div>
+            <p><%= user.name %></p>
+            <p><%= user.introduction %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

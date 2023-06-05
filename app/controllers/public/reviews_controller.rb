@@ -63,6 +63,11 @@ class Public::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @hashtags = @review.hashtags.all
     @tag_list = @review.hashtags.pluck(:name).join(',')
+    if @user == current_user
+      render "edit"
+    else
+      redirect_to review_path
+    end
   end
 
   def update

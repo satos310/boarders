@@ -6,7 +6,7 @@ class Public::RelationshipsController < ApplicationController
     current_user.follow(params[:user_id])
     #フォローの通知機能
     # @user.create_notification_follow!(current_user)
-    # redirect_to request.referer
+    redirect_to request.referer
   end
 
   def destroy
@@ -16,12 +16,12 @@ class Public::RelationshipsController < ApplicationController
 
   # フォローフォロワー一覧処理
   def followings
-    user = User.find(params[:user_id])
-    @users = user.followings
+    @user = User.find(params[:user_id])
+    @users = @user.followings
   end
 
   def followers
-    user = User.find(params[:user_id])
-    @users = user.followers
+    @user = User.find(params[:user_id])
+    @users = @user.followers
   end
 end

@@ -1,29 +1,35 @@
 <div class="container">
   <div class="row">
-    <div>
-      <%= image_tag @user.get_user_image(100,100) %>
-    </div>
+    <div><!-- プロフィール欄 -->
+      <div>
+        <%= image_tag @user.get_user_image(100,100) %>
+      </div>
 
-    <div>
-      <%= @user.name %>
-      <% if current_user && @user != current_user %>
-        <% if current_user.following?(@user) %>
-          <%= link_to "Unfollow", user_relationships_path(@user.id), method: :delete %>
-        <% else %>
-          <%= link_to "Follow", user_relationships_path(@user.id), method: :post %>
-        <% end %>
-      <% end %>
-    </div>
+      <div><!-- プロフ画像以外 -->
+        <div>
+          <%= @user.name %>
+          <% if current_user && @user != current_user %>
+            <% if current_user.following?(@user) %>
+              <%= link_to "Unfollow", user_relationships_path(@user.id), method: :delete %>
+            <% else %>
+              <%= link_to "Follow", user_relationships_path(@user.id), method: :post %>
+            <% end %>
+          <% else %>
+            <%= link_to "編集する", edit_user_path(@user.id), class: 'btn btn-outline-dark' %>
+          <% end %>
+        </div>
 
-    <div>
-      <p>投稿数：（未作成）<%#= @review.count %></p>
-      <p>フォロー: <%= @user.followings.count %></p>
-      <p>フォロワー: <%= @user.followers.count %></p>
-    </div>
+        <div>
+          <p>投稿数：（未作成）<%#= @review.count %></p>
+          <p><%= link_to "#{@user.followings.count}フォロー中", user_followings_path(@user.id), class: 'text-dark' %></p>
+          <p><%= link_to "#{@user.followers.count}フォロワー", user_followers_path(@user.id), class: 'text-dark' %></p>
+        </div>
 
-    <div>
-      <p><%= @user.introduction %></p>
-    </div>
+        <div>
+          <p><%= @user.introduction %></p>
+        </div>
+      </div><!-- /プロフ画像以外 -->
+    </div><!-- /プロフィール欄 -->
   </div><!-- /row -->
 
   <div class="row">
@@ -53,4 +59,3 @@
       <% end %><!-- review.eachのend -->
     </div>
   </div><!-- /row -->
-</div>

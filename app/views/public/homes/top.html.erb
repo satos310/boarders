@@ -15,10 +15,10 @@
       <% @reviews.each do |review| %>
         <div>
           <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-          <%= link_to user_path(review.user.id) do %>
+          <%= link_to user_path(review.user.id), class: 'text-dark' do %>
             <%= image_tag review.user.get_user_image(100,100) %>
+            <%= review.user.name %>
           <% end %>
-          <%= review.user.name %>
         </div>
 
         <%= link_to review_path(review.id) do %>

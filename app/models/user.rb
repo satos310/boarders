@@ -16,6 +16,7 @@ class User < ApplicationRecord
   #follow_id=相手
  # 自分がフォローしたり、アンフォローしたりするための記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  
  # sourceは本当はfollow_idとなっていてカラム名を示している。
  # フォロー一覧を表示するための記述
   has_many :followings, through: :relationships, source: :follow

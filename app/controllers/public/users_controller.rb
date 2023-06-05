@@ -9,9 +9,21 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+    if @user == current_user
+      render "edit"
+    else
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: "You have updated user successfully."
+    else
+      render "edit"
+    end
   end
 
   def unsubscribe
@@ -22,9 +34,8 @@ class Public::UsersController < ApplicationController
 
   private
 
-  def review_params
+  def user_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:name, :introduction, :user_image)
-          .merge(user_id: user.id)
+    params.require(:user).permit(:name, :introduction, :user_image)
   end
 end

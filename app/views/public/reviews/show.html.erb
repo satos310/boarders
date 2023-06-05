@@ -36,7 +36,9 @@
 
   <div class="row">
     <div>
-      <%= link_to "編集する", edit_review_path(@review.id) %>
+      <% if @review.user = current_user %>
+        <%= link_to "編集する", edit_review_path(@review.id) %>
+      <% end %>
     </div>
   </div>
 </div>
