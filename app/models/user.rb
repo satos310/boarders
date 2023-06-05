@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  # 追加
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
+
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :pickups, dependent: :destroy
@@ -28,13 +31,33 @@ class User < ApplicationRecord
   def unfollow(user_id)
     relationships.find_by(follow_id: user_id).destroy
   end
-  
+
   # フォローしているか判定
   def following?(user)
     followings.include?(user)
   end
 
   has_one_attached :user_image
+
+  # ログイン時にemail/nameでできるようにした際に追加
+  # def login
+  #   @login || self.name || self.email
+  # end
+
+  # def self.find_for_database_authentication(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if (login = conditions.delete(:login))
+  #     where(conditions.to_h).where(["lower(name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+  #   elsif conditions.has_key?(:name) || conditions.has_key?(:email)
+  #     where(conditions.to_h).first
+  #   end
+  # end
+
+  # def validate_name
+  #   if User.where(email: name).exists?
+  #     errors.add(:name, :invalid)
+  #   end
+  # end
 
   def get_user_image(width, height)
     unless user_image.attached?

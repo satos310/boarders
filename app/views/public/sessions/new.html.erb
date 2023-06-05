@@ -11,11 +11,11 @@
     <div>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <% if params[:login_failed].present? %>
-          <p class="alert alert-danger">ログインに失敗しました。正しいユーザーネームまたはメールアドレスとパスワードを入力してください。</p>
+          <p class="alert alert-danger">ログインに失敗しました。正しいユーザーネームとパスワードを入力してください。</p>
         <% end %>
         <div class="field">
           <!-- １つのフォームでユーザーネーム / メールアドレスを認識させたい -->
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム / メールアドレス" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム" %>
         </div>
 
         <div class="field">
