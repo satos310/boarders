@@ -16,7 +16,7 @@ class User < ApplicationRecord
   #follow_id=相手
  # 自分がフォローしたり、アンフォローしたりするための記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  
+
  # sourceは本当はfollow_idとなっていてカラム名を示している。
  # フォロー一覧を表示するための記述
   has_many :followings, through: :relationships, source: :follow
@@ -36,6 +36,10 @@ class User < ApplicationRecord
   # フォローしているか判定
   def following?(user)
     followings.include?(user)
+  end
+
+  def pickuped_by?(review_id)
+    pickuped.where(review_id: review_id).exists?
   end
 
   has_one_attached :user_image
