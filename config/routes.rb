@@ -31,9 +31,9 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followers', as: 'followers'
     end
 
-    resources :pickups, only: [:create, :destroy, :index]
+    # resources :pickups, only: [:create, :destroy, :index]
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      # resources :pickups, only: [:create, :destroy, :index]
+      resources :pickups, only: [:create, :destroy, :index]
       resources :stars, only: [:create, :destroy]
       get '/review/hashtag/:name' => 'reviews#hashtag'
       get '/review/hashtag' => 'reviews#hashtag'

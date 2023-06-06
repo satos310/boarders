@@ -37,10 +37,10 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
   # likesテーブルにpost_idが存在しているかどうか検索をかけている
   def pickuped_by?(review_id)
-    pickuped.where(review_id: review_id).exists?
+    pickups.where(review_id: review_id).exists?
   end
 
   has_one_attached :user_image

@@ -25,11 +25,18 @@
           <%= image_tag review.get_review_image(200,200) %>
         <% end %>
 
-        <!-- レビューの平均 -->
-        <div class="starrate">
-          <%# 評価数を星に置き換える %>
-          <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
-          <%= review.average_rating %>
+        <div>
+          <!-- レビューの平均 -->
+          <div class="starrate">
+            <%# 評価数を星に置き換える %>
+            <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
+            <%= review.average_rating %>
+          </div>
+
+          <!-- 投稿それぞれ異なるidを付与 -->
+          <!--<div id = "pickup_<%#= review.id %>">-->
+          <!--  <%#= render partial: "public/pickups/pickup", locals: { review: @review } %>-->
+          <!--</div>-->
         </div>
 
         <p><%= review.title %></p>
