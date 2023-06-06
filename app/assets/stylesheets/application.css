@@ -14,3 +14,16 @@
  *= require_self
  */
 
+.pickup-link {
+  text-decoration: none;
+}
+
+.pickup-btn {
+  font-size: 1em;
+  color: #808080;
+}
+
+.unpickup-btn {
+  font-size: 1em;
+  color: #e54747;
+}

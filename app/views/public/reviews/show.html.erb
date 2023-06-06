@@ -13,8 +13,13 @@
 
       <div>
         <%= link_to review_path(@review.id) do %>
-          <%= image_tag @review.get_review_image(200,200) %>
+          <%= image_tag @review.get_review_image(250,250) %>
         <% end %>
+      </div>
+
+      <!-- 投稿それぞれ異なるidを付与 -->
+      <div id = "pickup_<%= @review.id %>">
+        <%= render partial: "pickups/pickup", locals: { review: @review } %>
       </div>
 
       <div>
