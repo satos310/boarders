@@ -1,9 +1,6 @@
 class Public::PickupsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :review_params, only: [:create, :destroy]
-  
-  def index
-  end
 
   def create
     Pickup.create(user_id: current_user.id, review_id: @review.id)

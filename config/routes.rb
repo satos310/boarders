@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
     resources :users, only: [:show, :edit, :update, :friends] do
+      member do
+        get :pickups
+      end
       get 'friends'
       # フォロー機能はuserにネストさせている
       resource :relationships, only: [:create, :destroy]
@@ -33,7 +36,7 @@ Rails.application.routes.draw do
 
     # resources :pickups, only: [:create, :destroy, :index]
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resources :pickups, only: [:create, :destroy, :index]
+      resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
       get '/review/hashtag/:name' => 'reviews#hashtag'
       get '/review/hashtag' => 'reviews#hashtag'
