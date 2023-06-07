@@ -1,0 +1,7 @@
+<%= link_to review_path(review.id) do %>
+  <%= image_tag review.get_review_image(180,180) %>
+<% end %>
+<%= link_to review.user.name, user_path(review.user.id) %>
+<i class="fa fa-heart unpickup-btn"></i>
+<%= review.pickups.length %>
+<%= link_to review.title, review_path(review.id) %>

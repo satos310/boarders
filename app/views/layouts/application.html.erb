@@ -62,7 +62,7 @@
                   <%= link_to "通知", notifications_path, class: 'nav-link text-dark border mr-3' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "Pick Up", review_pickups_path(Review.ids), class: 'nav-link text-dark border mr-3' %>
+                  <%= link_to "Pick Up", pickups_user_path(current_user.id), class: 'nav-link text-dark border mr-3' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "プロフィール", user_path(current_user.id), class: 'nav-link text-dark border mr-3' %>

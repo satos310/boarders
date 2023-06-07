@@ -1,4 +1,6 @@
 class Public::UsersController < ApplicationController
+  before_action :set_user, only: [:pickups]
+
   def friends
     @friends = User.all
   end
@@ -32,10 +34,20 @@ class Public::UsersController < ApplicationController
   def withdraw
   end
 
+  # pluck → 指定したカラムのレコードの配列を取得
+  def pickups
+    pickups = Pickup.where(user_id: @user.id).pluck(:review_id)
+    @pickup_reviews = Review.find(pickups)
+  end
+
   private
 
   def user_params
     # mergeメソッドでユーザーIDをStrongParameterに追加
     params.require(:user).permit(:name, :introduction, :user_image)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

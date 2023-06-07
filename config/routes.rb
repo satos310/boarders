@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get 'homes/about'
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
+    
     resources :users, only: [:show, :edit, :update, :friends] do
       member do
         get :pickups
