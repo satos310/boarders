@@ -24,6 +24,16 @@ Rails.application.routes.draw do
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
     
+    resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :pickups, only: [:create, :destroy]
+      resources :stars, only: [:create, :destroy]
+      get '/review/hashtag/:name' => 'reviews#hashtag'
+      get '/review/hashtag' => 'reviews#hashtag'
+      collection do
+        get 'search'
+      end
+    end
+    
     resources :users, only: [:show, :edit, :update, :friends] do
       member do
         get :pickups
@@ -33,17 +43,6 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
-    end
-
-    # resources :pickups, only: [:create, :destroy, :index]
-    resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resources :pickups, only: [:create, :destroy]
-      resources :stars, only: [:create, :destroy]
-      get '/review/hashtag/:name' => 'reviews#hashtag'
-      get '/review/hashtag' => 'reviews#hashtag'
-      collection do
-        get 'search'
-      end
     end
 
     get "search_tag"=>"reviews#search_tag"
