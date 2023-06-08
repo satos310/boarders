@@ -23,6 +23,8 @@ class Public::HomesController < ApplicationController
     @stars = Star.all
     @all_rating = '総合評価'
     @hashtag_list = Hashtag.all
+    pickups = Pickup.where(user_id: @user.id).pluck(:review_id)
+    @pickup_reviews = Review.find(pickups)
   end
 
   def about
