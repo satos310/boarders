@@ -5,7 +5,7 @@ class Public::PickupsController < ApplicationController
   def create
     Pickup.create(user_id: current_user.id, review_id: @review.id)
   end
-
+  
   def destroy
     pickup = Pickup.find_by(user_id: current_user.id, review_id: @review.id)
     pickup.destroy

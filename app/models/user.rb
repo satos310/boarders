@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :pickups, dependent: :destroy
+  has_many :pickuped_reviews, through: :pickups, source: :review
   # has_many :notifications, dependent: :destroy
 
   #follower_id=自分
@@ -38,7 +39,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
-  # likesテーブルにpost_idが存在しているかどうか検索をかけている
+  # pickupsテーブルにreview_idが存在しているかどうか検索をかけている
   def pickuped_by?(review_id)
     pickups.where(review_id: review_id).exists?
   end

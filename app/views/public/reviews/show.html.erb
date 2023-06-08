@@ -17,7 +17,7 @@
         <% end %>
       </div>
 
-      <!-- 投稿それぞれ異なるidを付与 -->
+      <!-- いいねボタン => 投稿それぞれ異なるidを付与 -->
       <div id = "pickup_<%= @review.id %>">
         <%= render partial: "public/pickups/pickup", locals: { review: @review } %>
       </div>
@@ -29,7 +29,8 @@
           <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id)%>
         <% end %>
       </div>
-
+      
+      <!-- 評価の星表示 -->
       <% @review.stars.each do |star| %>
         <%= star.name %>
         <%# 評価数を星に置き換える %>
@@ -48,6 +49,7 @@
   </div>
 </div>
 
+<!-- 星評価のjsコード -->
 <script>
   <% @review.stars.each do |star| %>
     $('#review-rating-<%= star.id %>').empty();
