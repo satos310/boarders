@@ -26,16 +26,13 @@
             <div class="collapse navbar-collapse", id="navbarNavDrop wn">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <%= link_to "ホーム", admin_homes_path, class: 'nav-link text-dark border mr-3' %>
+                  <%= link_to "ホーム", admin_homes_top_path, class: 'nav-link text-dark border mr-3' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "レビュー検索", admin_reviews_path, class: 'nav-link text-dark border mr-3' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-dark border mr-3' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link text-dark border mr-3' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border' %>
