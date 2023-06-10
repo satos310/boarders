@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get 'homes/top' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
-    resources :reviews, only: [:index, :show, :edit, :update, :destroy]
+    resources :reviews, only: [:index, :show, :destroy]
     get "search_tag"=>"reviews#search_tag"
   end
 

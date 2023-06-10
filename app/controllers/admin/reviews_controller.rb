@@ -30,36 +30,6 @@ class Admin::ReviewsController < ApplicationController
     @hashtags = @review.hashtags.all
   end
 
-  def edit
-    @review = Review.find(params[:id])
-    @hashtags = @review.hashtags.all
-    @tag_list = @review.hashtags.pluck(:name).join(',')
-  end
-
-  def update
-    @review = Review.find(params[:id])
-    @review.stars.find_by(name: "ゲレンデ").update(score: params[:star][:star])
-    @review.stars.find_by(name: "コストパフォーマンス").update(score: params[:star][:star2])
-    @review.stars.find_by(name: "接客・サービス").update(score: params[:star][:star3])
-    @review.stars.find_by(name: "設備の充実").update(score: params[:star][:star4])
-    @review.stars.find_by(name: "周辺設備").update(score: params[:star][:star5])
-
-    # 入力されたタグを受け取る
-    tag_list = params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
-    if @review.update(review_params)
-      # このreview_idに紐づいていたタグを@oldに入れる
-      @old_relations = PostTag.where(review_id: @review.id)
-      # それらを取り出し、消す。消し終わる
-      @old_relations.each do |relation|
-        relation.delete
-      end
-       @review.save_hashtag(tag_list)
-      redirect_to review_path(@review.id), notice: '更新完了しました:)'
-    else
-      render :edit
-    end
-  end
-
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
