@@ -49,7 +49,7 @@ Devise.setup do |config|
   config.authentication_keys = [:name]
 
   # adminログイン機能実装時に追加
-  config.authentication_keys = [:email]
+  # config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
