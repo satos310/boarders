@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :edit, :update]
+    get "search_tag"=>"reviews#search_tag"
   end
 
   scope module: :public do
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
     get 'homes/about'
     get 'customers/unsubscribe'
     patch 'customers/withdraw'
-    
+
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
-    
+
     resources :users, only: [:show, :edit, :update, :friends] do
       member do
         get :pickups

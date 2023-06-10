@@ -25,7 +25,7 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    homes_top_path(resource)
+    homes_top_path
   end
 
   def after_sign_out_path_for(resource)
@@ -40,6 +40,6 @@ class Public::SessionsController < Devise::SessionsController
   protected
 
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :password])
   end
 end
