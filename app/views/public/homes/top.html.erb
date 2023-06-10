@@ -34,8 +34,8 @@
           </div>
 
           <!-- 投稿それぞれ異なるidを付与 -->
-          <div id = "pickup_<%#= review.id %>">
-            <%= render partial: "public/pickups/pickup", locals: { review: review } %>
+          <div id = "pickup_<%= review.id %>">
+            <%= render partial: "public/homes/pickup", locals: { review: review } %>
           </div>
         </div>
 

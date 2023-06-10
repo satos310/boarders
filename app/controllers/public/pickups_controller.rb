@@ -8,9 +8,7 @@ class Public::PickupsController < ApplicationController
 
   def destroy
     pickup = Pickup.find_by(user_id: current_user.id, review_id: @review.id)
-    if pickup.prenset?
-       pickup.destroy
-    end
+    pickup.destroy
   end
 
   private
