@@ -1,2 +1,66 @@
-<h1>Admin::Reviews#show</h1>
-<p>Find me in app/views/admin/reviews/show.html.erb</p>
+<!-- admin/review/show レビュー詳細ページ -->
+
+<div class="container">
+  <div class="row">
+    <div>
+      <div>
+        <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+        <%= link_to admin_user_path(@review.user.id) do %>
+          <%= image_tag @review.user.get_user_image(100,100) %>
+        <% end %>
+        <%= @review.user.name %>
+      </div>
+
+      <div>
+        <%= link_to admin_review_path(@review.id) do %>
+          <%= image_tag @review.get_review_image(250,250) %>
+        <% end %>
+      </div>
+
+      <!-- いいねボタン => 投稿それぞれ異なるidを付与 -->
+      <div id = "pickup_<%= @review.id %>">
+        <%= render partial: "public/pickups/pickup", locals: { review: @review } %>
+      </div>
+
+      <div>
+        <%= @review.title %><br>
+        <%= @review.body %><br>
+        <% @hashtags.each do |tag| %>
+          <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id)%>
+        <% end %>
+      </div>
+
+      <!-- 評価の星表示 -->
+      <% @review.stars.each do |star| %>
+        <%= star.name %>
+        <%# 評価数を星に置き換える %>
+        <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
+        <%= star.score %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <%= link_to "削除する", admin_review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger btn-block'  %>
+    </div>
+  </div>
+</div>
+
+<!-- 星評価のjsコード -->
+<script>
+  <% @review.stars.each do |star| %>
+    $('#review-rating-<%= star.id %>').empty();
+    var elem = document.getElementById('review-rating-<%=star.id%>');
+    var opt = {
+        readOnly: true,
+        starOn: "<%= asset_path('star-on.png') %>",
+        starOff: "<%= asset_path('star-off.png') %>",
+        starHalf: "<%= asset_path('star-half.png') %>",
+        score: function() {
+           return $(this).attr('data-score')
+        }
+    }
+    raty(elem, opt);
+  <% end %>
+</script>
