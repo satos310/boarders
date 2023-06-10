@@ -2,15 +2,17 @@
 
 <div class="container">
   <div classS="row">
-    <div>
+    <div class="col-md-3">
+      <%= link_to "<< BACK", :back, class: 'btn' %>
+    </div>
+
+    <div class="col d-flex">
       <%= form_with url: admin_reviews_path, local: true, method: :get do |f| %>
         <%= f.text_field :keyword %>
         <%= f.submit "検索" %>
       <% end %>
     </div>
-  </div>
 
-  <div class="row">
     <div>
       <% @reviews.each do |review| %>
         <div>
@@ -51,7 +53,7 @@
       <% end %><!-- review.eachのend -->
     </div>
   </div><!-- /row -->
-</div>
+</div><!-- /container -->
 
 <%# jquery発火イベントを記載%>
 <script>
