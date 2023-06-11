@@ -19,7 +19,9 @@
             <nav class="navbar navbar-expand-lg navbar-light flex-column">
               <!-- /admin ログイン時のheader -->
               <% if admin_signed_in? %>
-                <%= link_to "FourBoarders", admin_homes_top_path, class: 'navbar-brand font-weight-bold' %>
+                <%= link_to admin_homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                  <%= image_tag 'logo.jpg', size: "170x30" %>
+                <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -43,7 +45,9 @@
 
               <!-- /user ログイン時のheader -->
               <% elsif user_signed_in? %>
-                <%= link_to "FourBoarders", homes_top_path, class: 'navbar-brand font-weight-bold' %>
+                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                  <%= image_tag 'logo.jpg', size: "170x30" %>
+                <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -76,7 +80,9 @@
 
               <!-- /admin,/public共通 ログアウト時のheader -->
               <% else %>
-                <%= link_to "FourBoarders", homes_top_path, class: 'navbar-brand font-weight-bold' %>
+                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                  <%= image_tag 'logo.jpg', size: "170x30" %>
+                <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
