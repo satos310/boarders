@@ -57,6 +57,7 @@ class Public::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @hashtags = @review.hashtags.all
+    @comment = Comment.new
   end
 
   def edit

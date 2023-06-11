@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top' => 'homes#top'
     resources :genres, only: [:index, :create, :edit, :update]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
     resources :reviews, only: [:index, :show, :destroy]
     get "search_tag"=>"reviews#search_tag"
   end
@@ -22,20 +22,20 @@ Rails.application.routes.draw do
   scope module: :public do
     get 'homes/top'
     get 'homes/about'
-    get 'customers/unsubscribe'
-    patch 'customers/withdraw'
 
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
       get '/review/hashtag/:name' => 'reviews#hashtag'
       get '/review/hashtag' => 'reviews#hashtag'
+      resources :comments, only: [:create, :destroy]
       collection do
         get 'search'
       end
     end
 
-    resources :users, only: [:show, :edit, :update, :friends] do
+    resources :users, only: [:show, :edit, :update, :friends, :destroy] do
+      get 'unsubscribe'
       member do
         get :pickups
       end

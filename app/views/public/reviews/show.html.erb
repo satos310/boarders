@@ -29,7 +29,7 @@
           <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id)%>
         <% end %>
       </div>
-      
+
       <!-- 評価の星表示 -->
       <% @review.stars.each do |star| %>
         <%= star.name %>
@@ -37,13 +37,47 @@
         <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
         <%= star.score %>
       <% end %>
+
+      <!--コメントフォーム-->
+      <div class="new-comment">
+        <%= form_with(model:[@review, @comment], local: true) do |f| %>
+          <!--エラーメッセージ-->
+          <%= render 'layouts/error_messages', model: f.object %>
+          <%= f.text_field :comment, rows:'5',placeholder: "コメントをここに" %>
+          <%= f.submit "投稿する" %>
+        <% end %>
+      </div>
+
+      <!--コメント一覧部分-->
+      <div class="comments">
+        <% if @review.comments.present? %>
+          <p>コメント件数：<%= @review.comments.count %></p>
+
+          <% @review.comments.each do |comment| %>
+            <div class="flex-column">
+              <%= comment.created_at.strftime('%Y/%m/%d') %>
+              <%= image_tag comment.user.get_user_image(30,30) %>
+              <%= comment.user.name %><br>
+              <%= comment.comment %>
+              <% if comment.user == current_user %>
+                <div class="comment-delete">
+                  <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
+        <% else %>
+          <p>コメントはまだありません</p>
+        <% end %>
+      </div>
     </div>
-  </div>
+  </div><!-- /row-->
 
   <div class="row">
     <div>
       <% if @review.user == current_user %>
-        <%= link_to "編集する", edit_review_path(@review.id) %>
+        <%= link_to "編集する", edit_review_path(@review.id), class: 'btn btn-outline-dark' %>
       <% end %>
     </div>
   </div>

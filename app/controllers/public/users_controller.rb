@@ -29,9 +29,13 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe
+    @user = current_user
   end
 
-  def withdraw
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
   end
 
   # pluck → 指定したカラムのレコードの配列を取得

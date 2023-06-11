@@ -1,2 +1,15 @@
-<h1>Public::Users#unsubscribe</h1>
-<p>Find me in app/views/public/users/unsubscribe.html.erb</p>
+<!-- public/user/unsubscribe ユーザー退会確認ページ -->
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5>一度退会されますと、投稿やフォロー・フォロワー履歴が全て削除されます。</h5>
+      <h3>本当に退会されますか？</h3>
+
+      <div>
+        <%= link_to "戻る", :back, class: 'btn btn-outline-dark btn-block' %>
+        <%= link_to "削除する", user_path(@user.id), method: :delete, "data-confirm" => "最終確認 <本当に退会されますか？>", class: 'btn btn-outline-danger btn-block'  %>
+      </div>
+    </div>
+  </div>
+</div>
