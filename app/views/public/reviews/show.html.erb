@@ -46,13 +46,16 @@
       <!--コメント一覧部分-->
       <div id="comments_area">
         <ul class="list_none">
-          saishinnno
+          <li>最新のコメント2件を表示</li>
           <% @review.comments.order(created_at: :desc).limit(2). each do |comment| %>
-              <li><%= comment.comment %></li>
+            <li>
+              <%= image_tag comment.user.get_user_image(20,20) %>
+              <%= comment.comment %>
+            </li>
           <% end %>
           <li>
             <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= @review.id %>">
-              ...コメント<%#= review.comments.count %>件を全て見る
+              ...コメント<%= @review.comments.count %>件を全て表示
             </button>
           </li>
         </ul>
@@ -72,8 +75,8 @@
             </div>
           </div>
         </div>
-
-      </div>
+        
+      </div><!-- /comments_area -->
     </div><!-- /col -->
   </div><!-- /row-->
 

@@ -55,8 +55,38 @@
 
         <!--コメント一覧部分-->
         <div id="comments_area">
-          <%= render 'public/comments/comments', review: review %>
-        </div>
+          <ul class="list_none">
+            <li>最新のコメント2件を表示</li>
+            <% review.comments.order(created_at: :desc).limit(2). each do |comment| %>
+              <li>
+                <%= image_tag comment.user.get_user_image(20,20) %>
+                <%= comment.comment %>
+              </li>
+            <% end %>
+            <li>
+              <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
+                ...コメント<%= review.comments.count %>件を全て表示
+              </button>
+            </li>
+          </ul>
+
+          <div class="modal fade" id="exampleModalLong<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <%= render 'public/comments/comments', review: review %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /comments_area -->
       <% end %><!-- review.eachのend -->
 
     </div><!-- /col -->
