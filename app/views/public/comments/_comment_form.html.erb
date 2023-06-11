@@ -1,7 +1,9 @@
 <!-- コメント投稿フォームの部分テンプレート -->
-<%= form_with(model:[review, comment], local: true) do |f| %>
+<%= form_with  model:[review, comment] do |f| %>
   <!--エラーメッセージ-->
-  <%= render 'layouts/error_messages', model: f.object %>
+  <div id="comments_error">
+    <%= render 'layouts/error_messages', model: f.object %>
+  </div>
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
+  <%= f.submit "投稿する" %>
 <% end %>

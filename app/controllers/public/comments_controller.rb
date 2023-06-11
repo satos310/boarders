@@ -5,15 +5,19 @@ class Public::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.review_id = @review.id
     if @comment.save
-      redirect_to review_path(@review), notice: 'コメントを投稿しました'
+      flash.now[:notice] = 'コメントを投稿しました'
+      render 'public/comments/comments'  #render先にjsファイルを指定
     else
-      render 'reviews/show'
+      render :error
     end
   end
 
   def destroy
     Comment.find_by(id: params[:id], review_id: params[:review_id]).destroy
-    redirect_to review_path(params[:review_id]), alert: 'コメントを削除しました'
+    flash.now[:alert] = 'コメントを削除しました'
+    #renderしたときに@reviewのデータがないので@reviewを定義
+    @review = review.find(params[:review_id])
+    render :comments  #render先にjsファイルを指定
   end
 
   private

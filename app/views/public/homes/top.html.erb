@@ -47,17 +47,18 @@
             <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
           <% end %>
         </div>
+
+        <!--コメントフォーム-->
+        <div class="new-comment">
+          <%= render 'public/comments/comment_form', review: review, comment: @comment %>
+        </div>
+
+        <!--コメント一覧部分-->
+        <div id="comments_area">
+          <%= render 'public/comments/comments', review: review %>
+        </div>
       <% end %><!-- review.eachのend -->
 
-      <!--コメントフォーム-->
-      <div class="new-comment">
-        <%= render 'public/comments/comment_form', review: @reviews, comment: @comment %>
-      </div>
-
-      <!--コメント一覧部分-->
-      <div id="comments_area">
-        <%= render 'public/comments/comments', reviewt: @review %>
-      </div>
     </div><!-- /col -->
   </div><!-- /row -->
 </div>
