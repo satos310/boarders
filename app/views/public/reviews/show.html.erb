@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="row">
-    <div>
+    <div class="col">
       <div>
         <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
         <%= link_to user_path(@review.user.id) do %>
@@ -40,38 +40,14 @@
 
       <!--コメントフォーム-->
       <div class="new-comment">
-        <%= form_with(model:[@review, @comment], local: true) do |f| %>
-          <!--エラーメッセージ-->
-          <%= render 'layouts/error_messages', model: f.object %>
-          <%= f.text_field :comment, rows:'5',placeholder: "コメントをここに" %>
-          <%= f.submit "投稿する" %>
-        <% end %>
+        <%= render 'public/comments/comment_form', review: @review, comment: @comment %>
       </div>
 
       <!--コメント一覧部分-->
-      <div class="comments">
-        <% if @review.comments.present? %>
-          <p>コメント件数：<%= @review.comments.count %></p>
-
-          <% @review.comments.each do |comment| %>
-            <div class="flex-column">
-              <%= comment.created_at.strftime('%Y/%m/%d') %>
-              <%= image_tag comment.user.get_user_image(30,30) %>
-              <%= comment.user.name %><br>
-              <%= comment.comment %>
-              <% if comment.user == current_user %>
-                <div class="comment-delete">
-                  <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-
-        <% else %>
-          <p>コメントはまだありません</p>
-        <% end %>
+      <div id="comments_area">
+        <%= render 'public/comments/comments', reviewt: @review %>
       </div>
-    </div>
+    </div><!-- /col -->
   </div><!-- /row-->
 
   <div class="row">
