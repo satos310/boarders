@@ -9,7 +9,9 @@
       <%= comment.comment %>
       <% if comment.user == current_user %>
         <div class="comment-delete">
-          <%= link_to "削除", review_comment_path(comment.review, comment), method: :delete, remote: true, data: {confirm: "本当に削除しますか？"} %>
+          <%= link_to review_comment_path(comment.review, comment), method: :delete, remote: true, data: {confirm: "本当に削除しますか？"} do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         </div>
       <% end %>
     </div><!-- /col -->

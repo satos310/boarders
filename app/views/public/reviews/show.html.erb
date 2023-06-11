@@ -45,7 +45,34 @@
 
       <!--コメント一覧部分-->
       <div id="comments_area">
-        <%= render 'public/comments/comments', review: @review %>
+        <ul class="list_none">
+          saishinnno
+          <% @review.comments.order(created_at: :desc).limit(2). each do |comment| %>
+              <li><%= comment.comment %></li>
+          <% end %>
+          <li>
+            <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= @review.id %>">
+              ...コメント<%= review.comments.count %>件を全て見る
+            </button>
+          </li>
+        </ul>
+
+        <div class="modal fade" id="exampleModalLong<%= @review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= render 'public/comments/comments', review: @review %>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div><!-- /col -->
   </div><!-- /row-->
@@ -58,6 +85,12 @@
     </div>
   </div>
 </div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
 
 <!-- 星評価のjsコード -->
 <script>
@@ -77,17 +110,13 @@
   <% end %>
 </script>
 
-<!-- レビュー表示案1 -->
-<!--<div id="star-rate<%#= star.id %>"></div>-->
-<!--script>
-//   $('#star-rate<%#= star.id %>').empty();
-//   $('#star-rate<%# star.id %>').raty({
-//     size : 36,
-//     starOff : '<%#= asset_path('star-off.png') %>',
-//     starOn : '<%#= asset_path('star-on.png') %>',
-//     starHalf: '<%#= asset_path('star-half.png') %>',
-//     half : true,
-//     readOnly: true,
-//     score: <%#= star.score %>
-//   });
-// </script>
+<style>
+  .button {
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  .list_none {
+    list-style: none;
+  }
+</style>

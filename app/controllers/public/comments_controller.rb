@@ -6,7 +6,7 @@ class Public::CommentsController < ApplicationController
     @comment.review_id = @review.id
     if @comment.save
       flash.now[:notice] = 'コメントを投稿しました'
-      render 'public/comments/comments'  #render先にjsファイルを指定
+      render :comments  #render先にjsファイルを指定
     else
       render :error
     end
@@ -16,7 +16,7 @@ class Public::CommentsController < ApplicationController
     Comment.find_by(id: params[:id], review_id: params[:review_id]).destroy
     flash.now[:alert] = 'コメントを削除しました'
     #renderしたときに@reviewのデータがないので@reviewを定義
-    @review = review.find(params[:review_id])
+    @review = Review.find(params[:review_id])
     render :comments  #render先にjsファイルを指定
   end
 
