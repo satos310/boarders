@@ -98,6 +98,9 @@
                     <li class="nav-item">
                       <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark border mr-3' %>
                     </li>
+                    <li>
+                      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
+                    </li>
                   </ul>
                 </div>
               <% end %>

@@ -44,6 +44,16 @@ class User < ApplicationRecord
     pickups.where(review_id: review_id).exists?
   end
 
+  # ゲストログイン機能で追加
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+      # user.confirmed_at = Time.now  # Confirmable を使用している場合は必要
+      # 例えば name を入力必須としているため，user.name = "ゲストユーザー"
+    end
+  end
+
   has_one_attached :user_image
 
   # ログイン時にemail/nameでできるようにした際に追加
