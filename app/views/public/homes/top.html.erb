@@ -56,18 +56,22 @@
         <!--コメント一覧部分-->
         <div id="comments_area">
           <ul class="list_none">
-            <li>最新のコメント2件を表示</li>
+            <% if review.comments.present? %>
+              <li>最新のコメント2件を表示</li>
+            <% end %>
             <% review.comments.order(created_at: :desc).limit(2). each do |comment| %>
               <li>
                 <%= image_tag comment.user.get_user_image(20,20) %>
                 <%= comment.comment %>
               </li>
             <% end %>
-            <li>
-              <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
-                ...コメント<%= review.comments.count %>件を全て表示
-              </button>
-            </li>
+            <% if review.comments.present? %>
+              <li>
+                <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
+                  ...コメント<%= review.comments.count %>件を全て表示
+                </button>
+              </li>
+            <% end %>
           </ul>
 
           <div class="modal fade" id="exampleModalLong<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -111,16 +115,13 @@
   <% end %>
 </script>
 
-<!-- raty.js ver.3の記述方法（今回はver.4.1.1を使用） -->
-<script>
-//   $('#star').empty();
-//   $('.average-review-rating').raty({
-//     readOnly: true,
-//     starOn: "<%#= asset_path('star-on.png') %>",
-//     starOff: "<%#= asset_path('star-off.png') %>",
-//     starHalf: "<%#= asset_path('star-half.png') %>",
-//     score: function() {
-//       return $(this).attr('data-score')
-//     }
-//   });
-// </script>
+<style>
+  .button {
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  .list_none {
+    list-style: none;
+  }
+</style>

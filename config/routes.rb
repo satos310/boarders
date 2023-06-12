@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :edit, :update, :friends, :destroy] do
+      post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
       get 'unsubscribe'
       member do
         get :pickups
