@@ -1,14 +1,12 @@
 <!-- session/new ユーザーログインページ -->
 <div class="container">
-  <div class="row">
-    <div>
-      <h2>FourBoarders</h2><br>
+  <div="row jumbotron">
+    <div class="col mt-5">
+      <h2 class="mb-4">FourBoarders</h2><br>
       <p>登録してみんなの<br>「イケてる」を見つけよう</p>
     </div>
-  </div>
 
-  <div="row">
-    <div>
+    <div class="col">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <% if params[:login_failed].present? %>
           <p class="alert alert-danger">ログインに失敗しました。正しいユーザーネームとパスワードを入力してください。</p>
@@ -34,3 +32,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  .jumbotron {
+    background: url(BB4F4BEE-AD3F-4A87-8FF0-42392482BBB8.jpg) center no-repeat; background-size: cover;
+  }
+</style>
