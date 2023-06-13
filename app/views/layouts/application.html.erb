@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 
+    <script src="https://kit.fontawesome.com/e8f9341ad1.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -19,7 +20,7 @@
             <nav class="navbar navbar-expand-lg navbar-light flex-column">
               <!-- /admin ログイン時のheader -->
               <% if admin_signed_in? %>
-                <%= link_to admin_homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                <%= link_to admin_homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,23 +30,31 @@
                 <div class="collapse navbar-collapse", id="navbarNavDrop wn">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
-                      <%= link_to "ホーム", admin_homes_top_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to admin_homes_top_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-house pr-2"></i>ホーム
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "レビュー検索", admin_reviews_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to admin_reviews_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-magnifying-glass pr-2"></i>投稿レビュー検索
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to admin_users_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-users pr-2"></i>ユーザー一覧
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark border' %>
+                      <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                        <i class="fa-solid fa-arrow-right-from-bracket pr-2"></i>ログアウト
+                      <% end %>
                     </li>
                   </ul>
                 </div>
 
               <!-- /user ログイン時のheader -->
               <% elsif user_signed_in? %>
-                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,32 +64,46 @@
                 <div class="collapse navbar-collapse", id="navbarNavDrop wn">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
-                      <%= link_to "ホーム", homes_top_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to homes_top_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-house pr-2"></i>ホーム
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "トピックを検索", reviews_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-magnifying-glass pr-2"></i>トピックを検索
+                      <% end %>
+                    </li>
+                    <!--<li class="nav-item">-->
+                    <!--  <%#= link_to notifications_path, class: 'nav-link text-dark mr-3' do %>-->
+                        <!--<i class="fa-solid fa-bell pr-2"></i>通知-->
+                    <!--  <%# end %>-->
+                    <!--</li>-->
+                    <li class="nav-item">
+                      <%= link_to pickups_user_path(current_user.id), class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-bookmark pr-2"></i>Pick Up
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "通知", notifications_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to user_path(current_user.id), class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-user pr-2"></i>プロフィール
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "Pick Up", pickups_user_path(current_user.id), class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to new_review_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-regular fa-square-plus pr-2"></i>投稿する
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "プロフィール", user_path(current_user.id), class: 'nav-link text-dark border mr-3' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "投稿する", new_review_path, class: 'nav-link text-dark border mr-3' %>
-                    </li>
-                    <li class="nav-item">
-                      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark border' %>
+                      <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                        <i class="fa-solid fa-arrow-right-from-bracket pr-2"></i>ログアウト
+                      <% end %>
                     </li>
                   </ul>
                 </div>
 
               <!-- /admin,/public共通 ログアウト時のheader -->
               <% else %>
-                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold' do %>
+                <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,15 +111,21 @@
                 </button>
 
                 <div class="collapse navbar-collapse", id="navbarNavDrop wn">
-                  <ul class="navbar-nav ml-auto flex-column">
+                  <ul class="navbar-nav ml-auto flex-column p-10">
                     <li class="nav-item">
-                      <%= link_to "トピックを検索", reviews_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-magnifying-glass pr-2"></i>トピックを検索
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to new_user_registration_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-user-plus pr-2"></i>新規登録
+                      <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark border mr-3' %>
+                      <%= link_to new_user_session_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fa-solid fa-right-to-bracket pr-2"></i>ログイン
+                      <% end %>
                     </li>
                     <li>
                       <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
