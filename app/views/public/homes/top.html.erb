@@ -2,7 +2,7 @@
 
 <div class="container">
   <div classS="row">
-    <div>
+    <div clss="col-md-10 my-5">
       <%= form_with url: reviews_path, local: true, method: :get do |f| %>
         <%= f.text_field :keyword %>
         <%= f.submit "検索" %>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="row">
-    <div class="col">
+    <div class="col-md-10">
       <% @reviews.each do |review| %>
         <div>
           <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
@@ -25,16 +25,16 @@
           <%= image_tag review.get_review_image(200,200) %>
         <% end %>
 
-        <div>
+        <div class="col d-flex mt-1">
           <!-- レビューの平均 -->
-          <div class="starrate">
+          <div class="starrate mr-5">
             <%# 評価数を星に置き換える %>
             <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
             <%= review.average_rating %>
           </div>
 
           <!-- 投稿それぞれ異なるidを付与 -->
-          <div id = "pickup_<%= review.id %>">
+          <div id = "pickup_<%= review.id %>", class="mt-1">
             <%= render partial: "public/homes/pickup", locals: { review: review } %>
           </div>
         </div>
@@ -121,7 +121,7 @@
     outline: none;
     background: transparent;
   }
-  
+
   .list_none {
     list-style: none;
   }
