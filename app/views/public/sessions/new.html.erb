@@ -3,7 +3,7 @@
   <div="row jumbotron">
     <div class="col mt-5">
       <h2 class="mb-4">FourBoarders</h2><br>
-      <p>登録してみんなの<br>「イケてる」を見つけよう</p>
+      <p class="mb-5">ログインしてみんなの「イケてる」を見つけよう</p>
     </div>
 
     <div class="col">
@@ -11,16 +11,16 @@
         <% if params[:login_failed].present? %>
           <p class="alert alert-danger">ログインに失敗しました。正しいユーザーネームとパスワードを入力してください。</p>
         <% end %>
-        <div class="field">
+        <div class="field my-4">
           <!-- １つのフォームでユーザーネーム / メールアドレスを認識させたい -->
           <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザーネーム" %>
         </div>
 
-        <div class="field">
+        <div class="field mb-4">
           <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード" %>
         </div>
 
-        <div class="actions">
+        <div class="actions mb-5">
           <%= f.submit "ログインする" %>
         </div>
       <% end %>

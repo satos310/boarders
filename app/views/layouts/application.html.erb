@@ -127,7 +127,12 @@
                         <i class="fa-solid fa-right-to-bracket pr-2"></i>ログイン
                       <% end %>
                     </li>
-                    <li>
+                    <li class="nav-item">
+                      <%= link_to homes_about_path, class: 'nav-link text-dark mr-3' do %>
+                        <i class="fas fa-book-open pr-2"></i>About
+                      <% end %>
+                    </li>
+                    <li class="nav-item">
                       <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
                     </li>
                   </ul>
