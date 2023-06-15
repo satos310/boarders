@@ -4,6 +4,10 @@
   <div id="comments-error">
     <%= render 'layouts/error_messages', model: f.object %>
   </div>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "投稿する" %>
+
+  <div class="d-flex">
+    <%= f.text_area :comment, placeholder: "コメントを追加", class: 'form-control form-control-sm mr-1', style: 'width:75%',rows:'2' %>
+    <%= f.submit "投稿する", class: 'btn btn-light btn-outline-none text-secondary' %>
+  </div>
 <% end %>
+
