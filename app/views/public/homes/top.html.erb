@@ -39,7 +39,6 @@
           </div>
         </div>
 
-        <p></p>
         <p>
           <div id="wrap">
             <div class="txt-show">
@@ -107,8 +106,8 @@
   </div><!-- /row -->
 </div>
 
-<%# jquery発火イベントを記載%>
 <script>
+  // jquery発火イベントを記載
   <% @reviews.each do |review| %>
     $('#average-review-rating-<%= review.id %>').empty();
     var elem = document.getElementById('average-review-rating-<%=review.id%>');
@@ -124,6 +123,7 @@
     raty(elem, opt);
   <% end %>
 
+  // 「続きを見る」ボタン
   $(function(){
     $(".more").on("click", function() {
       $(this).toggleClass("on-click");
@@ -143,13 +143,14 @@
     list-style: none;
   }
 
+  /* 以下、「続きを見る」ボタン */
   .txt-hide{
     display: none;
   }
 
   button.more {
     width: 120px;
-    margin: 20px auto;
+    margin: 20px;
     display: block;
     background-color: #666;
     color: #fff;
@@ -161,7 +162,7 @@
   }
 
   button.more::after {
-    content: "もっと見る";
+    content: "続きを見る";
     transition: .1s;
     -erbkit-transition: .1s;
   }
