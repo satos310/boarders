@@ -19,7 +19,7 @@ class Admin::HomesController < ApplicationController
 
   def top
     @users = User.all
-    @reviews = Review.page(params[:page]).per(10)
+    @reviews = Review.page(params[:page]).per(10).order(created_at: :desc)
     @stars = Star.all
     @all_rating = '総合評価'
     @hashtag_list = Hashtag.all

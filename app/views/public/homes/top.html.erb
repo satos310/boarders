@@ -2,103 +2,111 @@
 
 <div class="container">
   <div classS="row">
-    <div clss="col-md-10 my-5">
+    <div class="col-md-5 mt-4 mb-2">
       <%= form_with url: reviews_path, local: true, method: :get do |f| %>
-        <%= f.text_field :keyword %>
+        <%= f.text_field :keyword, placeholder: "レビューを検索" %>
         <%= f.submit "検索" %>
       <% end %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-5">
-      <% @reviews.each do |review| %>
-        <div class="card mb-3 mx-auto" style="width: 23rem;">
-          <div>
-            <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-            <%= link_to user_path(review.user.id), class: 'text-dark' do %>
-              <%= image_tag review.user.get_user_image(30,30), class: 'm-2' %>
-              <%= review.user.name %>
-            <% end %>
-          </div>
-
-          <%= link_to review_path(review.id) do %>
-            <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top' %>
-          <% end %>
-
-          <div class="col d-flex mt-1">
-            <!-- レビューの平均 -->
-            <div class="starrate mr-5">
-              <%# 評価数を星に置き換える %>
-              <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
-              <%= review.average_rating %>
-            </div>
-
-            <!-- 投稿それぞれ異なるidを付与 -->
-            <div id = "pickup_<%= review.id %>", class="mt-1">
-              <%= render partial: "public/homes/pickup", locals: { review: review } %>
-            </div>
-          </div>
-
-          <div>
-            <%= review.title %>
-
-            <!--タグリスト-->
+    <div class="col-md-10 m-3">
+      <div class="row justify-content-start">
+        <% @reviews.each do |review| %>
+          <div class="card mb-4 mx-auto" style="width: 23rem;" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
             <div>
-              <% review.hashtags.each do |list|%>
-                <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
+              <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
+              <%= link_to user_path(review.user.id), class: 'text-dark' do %>
+                <%= image_tag review.user.get_user_image(30,30), class: 'm-2' %>
+                <%= review.user.name %>
               <% end %>
             </div>
 
-            <%= review.body %>
-          </div>
+            <%= link_to review_path(review.id) do %>
+              <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top' %>
+            <% end %>
 
+            <div class="col d-flex mt-1">
+              <!-- レビューの平均 -->
+              <div class="starrate mr-5 d-flex">
+                <%# 評価数を星に置き換える %>
+                <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %> class="mr-3"></div>
+                <div class="my-auto"><%= review.average_rating %></div>
+              </div>
 
-          <!--コメントフォーム-->
-          <div class="new-comment">
-            <%= render 'public/comments/comment_form', review: review, comment: @comment %>
-          </div>
-
-          <!--コメント一覧部分-->
-          <div id="comments_area">
-            <ul class="list_none">
-              <% if review.comments.present? %>
-                <li>最新のコメント2件を表示</li>
-              <% end %>
-              <% review.comments.order(created_at: :desc).limit(2). each do |comment| %>
-                <li>
-                  <%= image_tag comment.user.get_user_image(20,20) %>
-                  <%= comment.comment %>
-                </li>
-              <% end %>
-              <% if review.comments.present? %>
-                <li>
-                  <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
-                    ...コメント<%= review.comments.count %>件を全て表示
-                  </button>
-                </li>
-              <% end %>
-            </ul>
-
-            <div class="modal fade" id="exampleModalLong<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <%= render 'public/comments/comments', review: review %>
-                  </div>
-                </div>
+              <!-- 投稿それぞれ異なるidを付与 -->
+              <div id = "pickup_<%= review.id %>", class="mt-1">
+                <%= render partial: "public/homes/pickup", locals: { review: review } %>
               </div>
             </div>
 
-          </div><!-- /comments_area -->
-        </div><!-- /card -->
-      <% end %><!-- review.eachのend -->
+            <!-- 投稿本文 -->
+            <div class="mx-3">
+              <div class="my-1">
+                <%= review.title %>
+              </div>
+              <!--タグリスト-->
+              <div class="my-1">
+                <% review.hashtags.each do |list|%>
+                  <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
+                <% end %>
+              </div>
+
+              <div>
+                <input id="trigger1" class="grad-trigger" type="checkbox">
+                <label class="grad-btn text-muted" for="trigger1">続きを読む</label>
+                <div class="grad-item"><%= review.body %></div>
+              </div>
+            </div>
+
+            <!--コメントフォーム-->
+            <div class="new-comment mb-1 mx-3">
+              <%= render 'public/comments/comment_form', review: review, comment: @comment %>
+            </div>
+
+            <!--コメント一覧部分-->
+            <div id="comments_area">
+              <ul class="list_none">
+                <% if review.comments.present? %>
+                  <li>最新のコメント2件を表示</li>
+                <% end %>
+                <% review.comments.first(2). each do |comment| %>
+                  <li>
+                    <%= image_tag comment.user.get_user_image(20,20) %>
+                    <%= comment.comment %>
+                  </li>
+                <% end %>
+                <% if review.comments.present? %>
+                  <li>
+                    <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
+                      ...コメント<%= review.comments.count %>件を全て表示
+                    </button>
+                  </li>
+                <% end %>
+              </ul>
+
+              <div class="modal fade" id="exampleModalLong<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <%= render 'public/comments/comments', review: review %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /comments_area -->
+          </div><!-- /card -->
+        <% end %><!-- review.eachのend -->
+      </div>
+
     </div><!-- /col -->
   </div><!-- /row -->
 </div>
@@ -141,30 +149,32 @@
   }
 
   /* 以下、「続きを見る」ボタン */
-  /*.txt-hide{*/
-  /*  display: none;*/
-  /*}*/
-
-  /*button.more {*/
-  /*  width: 120px;*/
-  /*  margin: 20px;*/
-  /*  display: block;*/
-  /*  background-color: #666;*/
-  /*  color: #fff;*/
-  /*  padding:10px 15px;*/
-  /*  border: none;*/
-  /*  outline: 0;*/
-  /*  transition: .5s;*/
-  /*  -erbkit-transition: .5s;*/
-  /*}*/
-
-  /*button.more::after {*/
-  /*  content: "続きを見る";*/
-  /*  transition: .1s;*/
-  /*  -erbkit-transition: .1s;*/
-  /*}*/
-
-  /*button.more.on-click::after{*/
-  /*  content: "閉じる";*/
-  /*}*/
+  .grad-item {
+    position: relative;
+    overflow: hidden;
+    height: 35px; /*隠した状態の高さ*/
+  }
+  .grad-item::before {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /*グラデーションで隠す高さ*/
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.9) 50%, #fff 100%);
+    background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.9) 50%, #fff 100%);
+    content: "";
+  }
+  .grad-trigger {
+    display: none; /*チェックボックスは常に非表示*/
+  }
+  .grad-trigger:checked + .grad-btn {
+    display: none; /*チェックされていたら、grad-btnを非表示にする*/
+  }
+  .grad-trigger:checked ~ .grad-item {
+    height: auto; /*チェックされていたら、高さを戻す*/
+  }
+  .grad-trigger:checked ~ .grad-item::before {
+    display: none; /*チェックされていたら、grad-itemのbeforeを非表示にする*/
+  }
 </style>
