@@ -14,9 +14,9 @@
   </head>
 
   <body>
-    <div class="conatainer">
-      <div class="row">
-        <div class="col-md-2 mx-right border-end">
+    <div class="container">
+      <div class="row mx-auto">
+        <div class="col-md-3 border-end mt-4">
           <header>
             <nav class="navbar navbar-expand-lg navbar-light flex-column">
               <!-- /admin ログイン時のheader -->
@@ -24,11 +24,11 @@
                 <%= link_to admin_homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse", id="navbarNavDrop wn">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
                       <%= link_to admin_homes_top_path, class: 'nav-link text-dark mr-3' do %>
@@ -52,17 +52,16 @@
                     </li>
                   </ul>
                 </div>
-
               <!-- /user ログイン時のheader -->
               <% elsif user_signed_in? %>
                 <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse", id="navbarNavDrop wn">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
                       <%= link_to homes_top_path, class: 'nav-link text-dark mr-3' do %>
@@ -101,18 +100,17 @@
                     </li>
                   </ul>
                 </div>
-
               <!-- /admin,/public共通 ログアウト時のheader -->
               <% else %>
                 <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
                   <%= image_tag 'logo.jpg', size: "170x30" %>
                 <% end %>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDrop wn" aria-controls="navbarNavDrop wn" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse", id="navbarNavDrop wn">
-                  <ul class="navbar-nav ml-auto flex-column p-10">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
                       <%= link_to reviews_path, class: 'nav-link text-dark mr-3' do %>
                         <i class="fa-solid fa-magnifying-glass pr-2"></i>トピックを検索
@@ -143,16 +141,12 @@
           </header>
         </div>
 
-        <div class="col">
+        <div class="col-md-9 mx-auto mt-4">
           <main>
             <%= yield %>
           </main>
         </div>
       </div><!-- row -->
-    </div>
-
-
-
-
+    </div><!-- container -->
   </body>
 </html>

@@ -1,17 +1,15 @@
 <!-- public/homes トップページ（投稿レビュー一覧） -->
 
-<div class="container">
-  <div classS="row">
-    <div class="col-md-5 mt-4 mb-2">
-      <%= form_with url: reviews_path, local: true, method: :get do |f| %>
-        <%= f.text_field :keyword, placeholder: "レビューを検索" %>
-        <%= f.submit "検索" %>
-      <% end %>
-    </div>
+<div class="">
+  <div class="col-md-8 mt-4 mb-2">
+    <%= form_with url: reviews_path, local: true, method: :get do |f| %>
+      <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"40" %>
+      <%= f.submit "検索" %>
+    <% end %>
   </div>
 
   <div class="row">
-    <div class="col-md-10 m-3">
+    <div class="m-3">
       <div class="row justify-content-start">
         <% @reviews.each do |review| %>
           <div class="card mb-4 mx-auto" style="width: 23rem;" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
@@ -27,9 +25,9 @@
               <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top' %>
             <% end %>
 
-            <div class="col d-flex mt-1">
+            <div class="d-flex mt-1">
               <!-- レビューの平均 -->
-              <div class="starrate mr-5 d-flex">
+              <div class="starrate ml-3 mr-5 d-flex">
                 <%# 評価数を星に置き換える %>
                 <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %> class="mr-3"></div>
                 <div class="my-auto"><%= review.average_rating %></div>
@@ -54,8 +52,8 @@
               </div>
 
               <div>
-                <input id="trigger1" class="grad-trigger" type="checkbox">
-                <label class="grad-btn text-muted" for="trigger1" type="review_id">続きを読む</label>
+                <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
+                <label class="grad-btn text-muted" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
                 <div class="grad-item"><%= review.body %></div>
               </div>
             </div>
