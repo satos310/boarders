@@ -43,8 +43,8 @@
 
             <!-- 投稿本文 -->
             <div class="mx-3">
-              <div class="my-1">
-                <%= review.title %>
+              <div class="mt-2 mb-1">
+                <h5 class="strong"><%= review.title %></h5>
               </div>
               <!--タグリスト-->
               <div class="my-1">
@@ -55,7 +55,7 @@
 
               <div>
                 <input id="trigger1" class="grad-trigger" type="checkbox">
-                <label class="grad-btn text-muted" for="trigger1">続きを読む</label>
+                <label class="grad-btn text-muted" for="trigger1" type="review_id">続きを読む</label>
                 <div class="grad-item"><%= review.body %></div>
               </div>
             </div>

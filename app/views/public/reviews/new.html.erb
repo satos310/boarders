@@ -2,12 +2,12 @@
 
 <div class="container">
   <div class="row">
-    <div>
+    <div class="col-md-7 mx-auto mt-5">
       <%= form_with model: @review, url: reviews_path, method: :post do |f| %>
-        <table>
+        <table class="mb-4">
           <tr>
-            <th>レビュー種別</th>
-            <td>
+            <th class="pr-4">レビュー種別</th>
+            <td class="my-2">
               <%= f.radio_button :review_type, true %>
               <%= f.label :review_type_true, "ロケーション" %>
               <%= f.radio_button :review_type, false %>
@@ -16,28 +16,28 @@
           </tr>
 
           <tr>
-            <th>写真を追加（プレビュー表示させたい）</th>
+            <th>写真を追加</th>
             <!-- multiple: trueで画像の複数投稿を許可している -->
-            <td><%= f.file_field :review_image, accept: "image/*", class: "form-control-file user-image" %></td>
+            <td class="py-2"><%= f.file_field :review_image, accept: "image/*", class: "form-control-file user-image" %></td>
           </tr>
 
           <tr>
             <th>タイトル</th>
-            <td><%= f.text_field :title, autofocus: true, class: 'form-control title' %></td>
+            <td class="py-2"><%= f.text_field :title, autofocus: true, class: 'form-control title' %></td>
           </tr>
 
           <tr>
             <th>レビュー</th>
-            <td>
-              <%= f.text_area :body, class: 'form-control body', placeholder: "投稿文入力" %>
-              <%= f.text_area :name, class: 'form-control body', placeholder: "タグ入力" %>
+            <td class="py-2">
+              <%= f.text_area :body, class: 'form-control body mb-1', placeholder: "投稿文入力" %>
+              <%= f.text_field :name, class: 'form-control body', placeholder: "タグ入力" %>
             </td>
           </tr>
 
           <tr>
             <th>評価</th>
-            <td>
-              ゲレンデ<div id="post_raty"></div>
+            <td class="py-2">
+              ゲレンデ<div id="post_raty" class="mb-1"></div>
               <script>
                 var elem = document.getElementById('post_raty');
                 var opt = {
@@ -50,7 +50,7 @@
                   raty(elem,opt);
               </script>
 
-              コストパフォーマンス<div id="post_raty2"></div>
+              コストパフォーマンス<div id="post_raty2" class="mb-1"></div>
               <script>
                 var elem = document.getElementById('post_raty2');
                 var opt = {
@@ -63,7 +63,7 @@
                   raty(elem,opt);
               </script>
 
-              接客・サービス<div id="post_raty3"></div>
+              接客・サービス<div id="post_raty3" class="mb-1"></div>
               <script>
                 var elem = document.getElementById('post_raty3');
                 var opt = {
@@ -76,7 +76,7 @@
                   raty(elem,opt);
               </script>
 
-              設備の充実<div id="post_raty4"></div>
+              設備の充実<div id="post_raty4" class="mb-1"></div>
               <script>
                 var elem = document.getElementById('post_raty4');
                 var opt = {
@@ -89,7 +89,7 @@
                   raty(elem,opt);
               </script>
 
-              周辺設備<div id="post_raty5"></div>
+              周辺設備<div id="post_raty5" class="mb-1"></div>
               <script>
                 var elem = document.getElementById('post_raty5');
                 var opt = {
@@ -106,8 +106,8 @@
         </table>
 
         <div>
-          <%= link_to "戻る", :back, class: 'btn' %>
-          <%= f.submit "投稿する", class: 'btn' %>
+          <%= link_to "戻る", :back, class: 'mr-5 btn btn-outline-secondary' %>
+          <%= f.submit "投稿する", class: 'btn btn-outline-primary' %>
         </div>
       <% end %>
     </div>
