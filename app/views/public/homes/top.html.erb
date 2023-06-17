@@ -1,9 +1,9 @@
 <!-- public/homes トップページ（投稿レビュー一覧） -->
 
 <div class="">
-  <div class="col-md-8 mt-4 mb-2">
+  <div class="col-md-8 mx-auto mt-4 mb-2">
     <%= form_with url: reviews_path, local: true, method: :get do |f| %>
-      <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"40" %>
+      <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"35" %>
       <%= f.submit "検索" %>
     <% end %>
   </div>
@@ -33,7 +33,7 @@
                 <div class="my-auto"><%= review.average_rating %></div>
               </div>
 
-              <!-- 投稿それぞれ異なるidを付与 -->
+              <!-- Pickup（いいね） -->
               <div id = "pickup_<%= review.id %>", class="mt-1">
                 <%= render partial: "public/homes/pickup", locals: { review: review } %>
               </div>
@@ -51,7 +51,7 @@
                 <% end %>
               </div>
 
-              <div>
+              <div class="my-1">
                 <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
                 <label class="grad-btn text-muted" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
                 <div class="grad-item"><%= review.body %></div>

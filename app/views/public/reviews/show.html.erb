@@ -1,70 +1,69 @@
 <!-- public/review/show レビュー詳細ページ -->
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4 pt-4">
-      <div>
+<div class="row">
+  <div class="col-md-12 mx-auto"></div>
+    <div class="col-md-6 mr-4">
+      <div class="d-flex align-items-center">
         <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
         <%= link_to user_path(@review.user.id) do %>
-          <%= image_tag @review.user.get_user_image(30,30) %>
+          <%= image_tag @review.user.get_user_image(30,30), class: 'm-2' %>
         <% end %>
         <%= @review.user.name %>
+        <% if @review.user == current_user %>
+          <%= link_to edit_review_path(@review.id) do %>
+            <i class="fa-regular fa-pen-to-square fa-lg ml-5"></i>
+          <% end %>
+        <% end %>
       </div>
 
       <div>
         <%= link_to review_path(@review.id) do %>
-          <%= image_tag @review.get_review_image(350,350) %>
+          <%= image_tag @review.get_review_image(400,400) %>
         <% end %>
       </div>
 
-      <!-- いいねボタン => 投稿それぞれ異なるidを付与 -->
-      <div id = "pickup_<%= @review.id %>">
+      <div id="pickup_<%= @review.id %>" class="my-2">
         <%= render partial: "public/pickups/pickup", locals: { review: @review } %>
       </div>
 
-      <div>
-        <%= @review.title %><br>
-        <%= @review.body %><br>
-        <% @hashtags.each do |tag| %>
-          <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id)%>
+
+      <div class="mt-2 mb-1">
+        <h5 class="strong"><%= @review.title %></h5>
+      </div>
+      <!--タグリスト-->
+      <div class="my-1">
+        <% @hashtags.each do |tag|%>
+          <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id) %>
         <% end %>
+      </div>
+      <div class="my-1 mb-3">
+        <%= @review.body %>
       </div>
 
       <!-- 評価の星表示 -->
       <% @review.stars.each do |star| %>
         <%= star.name %>
         <%# 評価数を星に置き換える %>
-        <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
-        <%= star.score %>
+        <div class="d-flex mb-2">
+          <div id="review-rating-<%= star.id %>" data-score=<%= star.score %> class="mr-3"></div>
+          <%= star.score %>
+        </div>
       <% end %>
 
-      <div class="new-comment">
+      <div class="new-comment mt-3">
         <%= render 'public/comments/comment_form', review: @review, comment: @comment %>
       </div>
     </div>
 
     <!--コメントフォーム-->
-    <div class="col-md-4 pt-4">
+    <div class="col-md-5 pt-4">
       <!--コメント一覧部分-->
       <div id="comments_area">
         <%= render 'public/comments/comments', review: @review %>
       </div><!-- /comments_area -->
     </div><!-- /col -->
-  </div><!-- /row-->
-
-  <div class="row">
-    <div>
-      <% if @review.user == current_user %>
-        <%= link_to "編集する", edit_review_path(@review.id), class: 'btn btn-outline-dark' %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
+  </div><!-- /col-10, offset-1 -->
+</div><!-- /row-->
 
 
 <!-- 星評価のjsコード -->
