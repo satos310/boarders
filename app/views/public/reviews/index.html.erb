@@ -1,56 +1,117 @@
 <!-- 検索結果画面 review/index -->
 
-<div class="container">
-  <div classS="row">
-    <div class="search_form">
-      <%= form_with url: reviews_path, local: true, method: :get, class: "search-form" do |f| %>
-        <%= f.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
-        <%= f.submit "検索", class: "search-btn" %>
-      <% end %>
-    </div>
-  </div>
+<div class="col-md-8 mx-auto mt-3 mb-4">
+  <%= form_with url: reviews_path, local: true, method: :get do |f| %>
+    <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"35" %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
 
-  <div class="row">
-    <div>
-      <% if @reviews.present? %>
-        <!-- 検索ワードを検索フォーム内に収めたい -->
-        <h3>検索結果 "<%= @keyword %>"</h3>
+<div class="m-3">
+  <% if @reviews.present? %>
+    <h3 class="mb-3">検索結果 "<%= @keyword %>"</h3>
 
-        <% @reviews.each do |review| %>
+    <div class="row justify-content-start">
+      <% @reviews.each do |review| %>
+        <div class="card mb-4 mx-auto" style="width: 23rem;" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
           <div>
             <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-            <%= link_to user_path(review.user.id) do %>
-              <%= image_tag review.user.get_user_image(100,100) %>
+            <%= link_to user_path(review.user.id), class: 'text-dark' do %>
+              <%= image_tag review.user.get_user_image(30,30), class: 'm-2' %>
+              <%= review.user.name %>
             <% end %>
-            <%= review.user.name %>
           </div>
 
           <%= link_to review_path(review.id) do %>
-            <%= image_tag review.get_review_image(200,200) %>
+            <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top' %>
           <% end %>
 
-          <!-- レビューの平均 -->
-          <div class="starrate">
-            <%# 評価数を星に置き換える %>
-            <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %>></div>
-            <%= review.average_rating %>
+          <div class="d-flex mt-1">
+            <!-- レビューの平均 -->
+            <div class="starrate ml-3 mr-5 d-flex">
+              <%# 評価数を星に置き換える %>
+              <div id="average-review-rating-<%= review.id %>" data-score=<%= review.average_rating %> class="mr-3"></div>
+              <div class="my-auto"><%= review.average_rating %></div>
+            </div>
+
+            <!-- Pickup（いいね） -->
+            <div id = "pickup_<%= review.id %>", class="mt-1">
+              <%= render partial: "public/homes/pickup", locals: { review: review } %>
+            </div>
           </div>
 
-          <p><%= review.title %></p>
-          <p><%= review.body %></p>
-          <div>
+          <!-- 投稿本文 -->
+          <div class="mx-3">
+            <div class="mt-2">
+              <span class="font-weight-bold"><%= review.title %></span>
+            </div>
             <!--タグリスト-->
-            <% review.hashtags.each do |list|%>
-              <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
-            <% end %>
+            <div class="my-1">
+              <% review.hashtags.each do |list|%>
+                <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
+              <% end %>
+            </div>
+
+            <!-- review_body -->
+            <div class="my-1 mb-2">
+              <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
+              <label class="grad-btn text-muted" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
+              <div class="grad-item"><%= review.body %></div>
+            </div>
           </div>
-        <% end %><!-- review.eachのend -->
-      <% else %>
-        <h3>検索結果はありません</3>
-      <% end %>
-    </div>
-  </div>
+
+          <!--コメントフォーム-->
+          <div class="new-comment mb-1 mx-3">
+            <%= render 'public/comments/comment_form', review: review, comment: @comment %>
+          </div>
+
+          <!--コメント一覧部分-->
+          <div id="comments_area">
+            <ul class="list_none">
+              <% if review.comments.present? %>
+                <li>最新のコメント2件を表示</li>
+              <% end %>
+              <% review.comments.first(2). each do |comment| %>
+                <li>
+                  <%= image_tag comment.user.get_user_image(20,20) %>
+                  <%= comment.comment %>
+                </li>
+              <% end %>
+              <% if review.comments.present? %>
+                <li>
+                  <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
+                    <span class="text-secondary">...コメント<%= review.comments.count %>件を全て表示</span>
+                  </button>
+                </li>
+              <% end %>
+            </ul>
+
+            <div class="modal fade" id="exampleModalLong<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <%= render 'public/comments/comments', review: review %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /comments_area -->
+        </div><!-- /card -->
+      <% end %><!-- review.eachのend -->
+    </div><!-- /row カードの2行横並べ -->
+  </div><!-- /col -->
+  <% else %>
+    <h3>検索結果、該当なし</h3>
+  <% end %>
 </div>
+
 
 <%# jquery発火イベントを記載%>
 <script>
