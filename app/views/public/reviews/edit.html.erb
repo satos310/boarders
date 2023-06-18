@@ -1,13 +1,9 @@
 <!-- public/review/edit 投稿編集画面 -->
 
-<div class="container">
-  <div class="row">
-    <div>
-      <h3>投稿を編集</h3>
-    </div>
-  </div>
 
-  <div class="row">
+  <div class="col-md-8 mx-auto">
+    <h4 class="mb-4">投稿を編集</h4>
+
     <div>
       <%= form_with model: @review, url: review_path(@review.id), method: :patch do |f| %>
         <div class="form-group">
@@ -22,16 +18,16 @@
           <%= f.text_area :body, value: @review.body, class: 'form-control' %><br>
         </div>
 
-        <div class="field">
-          <%= f.label "ハッシュタグ (,で区切ると複数タグ登録できます)" %>
+        <div class="field mb-4">
+          <%= f.label "スペース␣ で区切ると複数タグ登録できます)" %>
           <%= f.text_field :name, value: @tag_list, class:"form-control" %>
         </div>
 
         <table>
           <tr>
-            <th>評価</th>
+            <th class="pr-5">評価</th>
             <td>
-              ゲレンデ<div id="post_raty"></div>
+              ゲレンデ<div id="post_raty" class="mb-2"></div>
               <script>
                 var elem = document.getElementById('post_raty');
                 var opt = {
@@ -44,7 +40,7 @@
                   raty(elem,opt);
               </script>
 
-              コストパフォーマンス<div id="post_raty2"></div>
+              コストパフォーマンス<div id="post_raty2" class="mb-2"></div>
               <script>
                 var elem = document.getElementById('post_raty2');
                 var opt = {
@@ -57,7 +53,7 @@
                   raty(elem,opt);
               </script>
 
-              接客・サービス<div id="post_raty3"></div>
+              接客・サービス<div id="post_raty3" class="mb-2"></div>
               <script>
                 var elem = document.getElementById('post_raty3');
                 var opt = {
@@ -70,7 +66,7 @@
                   raty(elem,opt);
               </script>
 
-              設備の充実<div id="post_raty4"></div>
+              設備の充実<div id="post_raty4" class="mb-2"></div>
               <script>
                 var elem = document.getElementById('post_raty4');
                 var opt = {
@@ -83,7 +79,7 @@
                   raty(elem,opt);
               </script>
 
-              周辺設備<div id="post_raty5"></div>
+              周辺設備<div id="post_raty5" class="mb-2"></div>
               <script>
                 var elem = document.getElementById('post_raty5');
                 var opt = {
@@ -99,12 +95,11 @@
           </tr>
         </table><!-- 星評価欄の閉じタグ -->
 
-      　<div class="actions" style="margin:20px 0;">
-          <%= f.submit "編集を保存", class: "btn btn-outline-primary btn-block" %>
-          <%= link_to "戻る", :back, class: 'btn btn-outline-dark btn-block' %>
-          <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger btn-block'  %>
+      　<div class="actions">
+          <%= f.submit "編集を保存", class: "btn btn-outline-primary mr-4" %>
+          <%= link_to "戻る", review_path(@review.id), class: 'btn btn-outline-dark mr-4' %>
+          <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger'  %>
         </div>
       <% end %> <!-- form_withのend -->
     </div><!-- /col -->
   </div> <!-- /row-->
-</div>

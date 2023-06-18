@@ -2,10 +2,10 @@
 <% if review.comments.present? %>
   <p>コメント件数：<%= review.comments.count %></p>
   <% review.comments.each do |comment| %>
-    <div class="col">
+    <div class="col mb-2">
       <div class="d-flex">
         <%= comment.created_at.strftime('%Y/%m/%d') %>
-        <%= image_tag comment.user.get_user_image(30,30) %>
+        <%= image_tag comment.user.get_user_image(25,25) %>
         <%= comment.user.name %>
         <% if comment.user == current_user %>
           <div class="comment-delete">
