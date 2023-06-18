@@ -9,6 +9,7 @@ class Review < ApplicationRecord
 
   has_one_attached :review_image
 
+  validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 250 }
 
   def self.search(search)

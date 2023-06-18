@@ -65,3 +65,6 @@ gem 'kaminari'
 
 # FontAwesomeの導入
 gem 'font-awesome-sass'
+
+# 日本語化
+gem 'rails-i18n'
