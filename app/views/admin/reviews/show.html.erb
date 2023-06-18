@@ -1,55 +1,62 @@
 <!-- admin/review/show レビュー詳細ページ -->
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <%= link_to "<< BACK", :back, class: 'btn' %>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <div class="col">
-          <!-- ゆくゆくは画像の複数枚投稿・表示させたい -->
-          <%= link_to admin_user_path(@review.user.id) do %>
-            <%= image_tag @review.user.get_user_image(100,100) %>
-          <% end %>
-          <%= @review.user.name %>
-        </div>
-
+<div class="row">
+  <div class="col-md-12 mx-auto"></div>
+    <div class="col-md-6 mr-4">
+      <div class="d-flex align-items-center">
+        <%= link_to admin_user_path(@review.user.id) do %>
+          <%= image_tag @review.user.get_user_image(30,30), class: 'm-2' %>
+        <% end %>
+        <span class="mr-5"><%= @review.user.name %></span>
         <div>
-          <%= link_to admin_review_path(@review.id) do %>
-            <%= image_tag @review.get_review_image(250,250) %>
-          <% end %>
+          <%= link_to "削除する", admin_review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger'  %>
         </div>
+      </div>
 
-        <!-- いいねボタン => 投稿それぞれ異なるidを付与 -->
-        <div id = "pickup_<%= @review.id %>">
-          <%= render partial: "public/pickups/pickup", locals: { review: @review } %>
-        </div>
-
-        <div>
-          <%= @review.title %><br>
-          <%= @review.body %><br>
-          <% @hashtags.each do |tag| %>
-            <%= link_to "##{tag.name}", search_tag_path(hashtag_id: tag.id)%>
-          <% end %>
-        </div>
-
-        <!-- 評価の星表示 -->
-        <% @review.stars.each do |star| %>
-          <%= star.name %>
-          <%# 評価数を星に置き換える %>
-          <div id="review-rating-<%= star.id %>" data-score=<%= star.score %>></div>
-          <%= star.score %>
+      <div>
+        <%= link_to admin_review_path(@review.id) do %>
+          <%= image_tag @review.get_review_image(400,400) %>
         <% end %>
       </div>
-    </div><!-- /row -->
 
-    <div>
-      <%= link_to "削除する", admin_review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger btn-block'  %>
+      <div id="pickup_<%= @review.id %>" class="my-2">
+        <%= render partial: "public/pickups/pickup", locals: { review: @review } %>
+      </div>
+
+
+      <div class="mt-2 mb-1">
+        <h5 class="strong"><%= @review.title %></h5>
+      </div>
+      <!--タグリスト-->
+      <div class="my-1">
+        <% @hashtags.each do |tag|%>
+          <%= link_to "##{tag.name}", admin_search_tag_path(hashtag_id: tag.id) %>
+        <% end %>
+      </div>
+      <div class="my-1 mb-3">
+        <%= @review.body %>
+      </div>
+
+      <!-- 評価の星表示 -->
+      <% @review.stars.each do |star| %>
+        <%= star.name %>
+        <%# 評価数を星に置き換える %>
+        <div class="d-flex mb-2">
+          <div id="review-rating-<%= star.id %>" data-score=<%= star.score %> class="mr-3"></div>
+          <%= star.score %>
+        </div>
+      <% end %>
     </div>
-  </div><!-- /row -->
-</div>
+
+    <!--コメントフォーム-->
+    <div class="col-md-5 pt-4">
+      <!--コメント一覧部分-->
+      <div id="comments_area">
+        <%= render 'public/comments/comments', review: @review %>
+      </div><!-- /comments_area -->
+    </div><!-- /col -->
+  </div><!-- /col-10, offset-1 -->
+</div><!-- /row-->
 
 <!-- 星評価のjsコード -->
 <script>
