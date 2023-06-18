@@ -1,6 +1,6 @@
 ja:
   activerecord:
     attributes:
-      comment:
-        raty: 星評価
+      review:
+        stars: 星評価
         content: 文字数
