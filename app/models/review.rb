@@ -5,10 +5,11 @@ class Review < ApplicationRecord
   has_many :stars,      dependent: :destroy
   has_many :post_tags,  dependent: :destroy
   has_many :hashtags,   through: :post_tags
-
   has_many :reviewd_users, through: :reviews, source: :user
 
   has_one_attached :review_image
+
+  validates :body, presence: true, length: { maximum: 250 }
 
   def self.search(search)
     if search != ""

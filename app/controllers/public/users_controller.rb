@@ -42,6 +42,7 @@ class Public::UsersController < ApplicationController
   def pickups
     pickups = Pickup.where(user_id: @user.id).pluck(:review_id)
     @pickup_reviews = Review.find(pickups)
+    @comment = Comment.new
   end
 
   private

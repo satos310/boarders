@@ -97,7 +97,7 @@
     　<div class="actions">
         <%= f.submit "編集を保存", class: "btn btn-outline-primary mr-4" %>
         <%= link_to "戻る", review_path(@review.id), class: 'btn btn-outline-dark mr-4' %>
-        <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger'  %>
+        <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger' %>
       </div>
     <% end %> <!-- form_withのend -->
   </div><!-- /col -->

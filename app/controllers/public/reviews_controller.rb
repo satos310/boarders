@@ -31,12 +31,15 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    # 星評価の項目指定
     @review.stars.build(name: "ゲレンデ", score: params[:star][:star])
     @review.stars.build(name: "コストパフォーマンス", score: params[:star][:star2])
     @review.stars.build(name: "接客・サービス", score: params[:star][:star3])
     @review.stars.build(name: "設備の充実", score: params[:star][:star4])
     @review.stars.build(name: "周辺設備", score: params[:star][:star5])
+    
     @review.user_id = current_user.id
+    # ハッシュタグ
     hashtag_list = []
     receive_hashtag_list=params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
     receive_hashtag_list.each do |tag_name|
@@ -44,7 +47,7 @@ class Public::ReviewsController < ApplicationController
     end
     if @review.save
       @review.save_hashtag(hashtag_list)
-      redirect_to homes_top_path
+      redirect_to root_path
     else
       render :new
     end
