@@ -76,7 +76,7 @@
             <% if review.comments.present? %>
               <li>
                 <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
-                  ...コメント<%= review.comments.count %>件を全て表示
+                  <span class="text-secondary">...コメント<%= review.comments.count %>件を全て表示</span>
                 </button>
               </li>
             <% end %>
@@ -120,14 +120,6 @@
     }
     raty(elem, opt);
   <% end %>
-
-  // 「続きを見る」ボタン
-  // $(function(){
-  //   $(".more").on("click", function() {
-  //     $(this).toggleClass("on-click");
-  //     $(".txt-hide").slideToggle(1000);
-  //   });
-  // });
 </script>
 
 <style>

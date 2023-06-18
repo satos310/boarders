@@ -19,6 +19,7 @@ class Public::ReviewsController < ApplicationController
     @hashtag = Hashtag.find(params[:hashtag_id])
     #検索されたタグに紐づく投稿を表示
     @reviews = @hashtag.reviews.page(params[:page]).per(10)
+    @comment = Comment.new
   end
 
   def new
