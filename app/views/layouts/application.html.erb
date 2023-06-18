@@ -52,6 +52,7 @@
                     </li>
                   </ul>
                 </div>
+
               <!-- /user ログイン時のheader -->
               <% elsif user_signed_in? %>
                 <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>
@@ -100,6 +101,7 @@
                     </li>
                   </ul>
                 </div>
+
               <!-- /admin,/public共通 ログアウト時のheader -->
               <% else %>
                 <%= link_to homes_top_path, class: 'navbar-brand font-weight-bold pb-4' do %>

@@ -1,7 +1,7 @@
 <!-- Pickup　homes用テンプレート -->
 
 <% if !user_signed_in? %>
-  <i class="fa fa-heart pickup-btn"></i>
+  <i class="fa-solid fa-bookmark"></i>
   <%= review.pickups.length %>
 <% elsif current_user.pickuped_by?(review.id) %>
   <%= link_to review_pickup_path(review.id, review.pickups), class: "pickup-link", method: :delete, remote: true do %>

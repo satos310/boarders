@@ -1,20 +1,16 @@
 <!-- admin/session 管理者ログインページ -->
 
-<div class="container">
-  <div class="row">
-    <h2>Admin / Log in</h2>
-  </div>
+<div class="">
+  <h2 class="mt-2 mb-5">Admin / Log in</h2>
 
-  <div class="row">
+  <div class="">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field mb-3">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
       </div>
 
       <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
@@ -24,7 +20,7 @@
         </div>
       <% end %>
 
-      <div class="actions">
+      <div class="actions mt-3">
         <%= f.submit "Log in" %>
       </div>
     <% end %>
