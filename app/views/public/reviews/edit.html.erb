@@ -1,105 +1,104 @@
 <!-- public/review/edit 投稿編集画面 -->
 
+<div class="col-md-8 mx-auto">
+  <h4 class="mb-4">投稿を編集</h4>
 
-  <div class="col-md-8 mx-auto">
-    <h4 class="mb-4">投稿を編集</h4>
+  <div>
+    <%= form_with model: @review, url: review_path(@review.id), method: :patch do |f| %>
+      <div class="form-group">
+        <label for="review_Image">投稿画像</label>
+        <%= f.file_field :review_image, accept: "image/*", class: "form-control-file user-image" %>
+      </div>
 
-    <div>
-      <%= form_with model: @review, url: review_path(@review.id), method: :patch do |f| %>
-        <div class="form-group">
-          <label for="review_Image">投稿画像</label>
-          <%= f.file_field :review_image, accept: "image/*", class: "form-control-file user-image" %>
-        </div>
+      <div>
+        <lavel for="title">タイトル</label>
+        <%= f.text_field :title, value: @review.title, class: 'form-control' %><br>
+        <lavel for="body">レビュー文</label>
+        <%= f.text_area :body, value: @review.body, class: 'form-control' %><br>
+      </div>
 
-        <div>
-          <lavel for="title">タイトル</label>
-          <%= f.text_field :title, value: @review.title, class: 'form-control' %><br>
-          <lavel for="body">レビュー文</label>
-          <%= f.text_area :body, value: @review.body, class: 'form-control' %><br>
-        </div>
+      <div class="field mb-4">
+        <%= f.label "スペース␣ で区切ると複数タグ登録できます)" %>
+        <%= f.text_field :name, value: @tag_list, class:"form-control" %>
+      </div>
 
-        <div class="field mb-4">
-          <%= f.label "スペース␣ で区切ると複数タグ登録できます)" %>
-          <%= f.text_field :name, value: @tag_list, class:"form-control" %>
-        </div>
+      <table>
+        <tr>
+          <th class="pr-5">評価</th>
+          <td>
+            ゲレンデ<div id="post_raty" class="mb-2"></div>
+            <script>
+              var elem = document.getElementById('post_raty');
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  scoreName: 'star[star]',
+                };
+                raty(elem,opt);
+            </script>
 
-        <table>
-          <tr>
-            <th class="pr-5">評価</th>
-            <td>
-              ゲレンデ<div id="post_raty" class="mb-2"></div>
-              <script>
-                var elem = document.getElementById('post_raty');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star]',
-                  };
-                  raty(elem,opt);
-              </script>
+            コストパフォーマンス<div id="post_raty2" class="mb-2"></div>
+            <script>
+              var elem = document.getElementById('post_raty2');
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  scoreName: 'star[star2]',
+                };
+                raty(elem,opt);
+            </script>
 
-              コストパフォーマンス<div id="post_raty2" class="mb-2"></div>
-              <script>
-                var elem = document.getElementById('post_raty2');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star2]',
-                  };
-                  raty(elem,opt);
-              </script>
+            接客・サービス<div id="post_raty3" class="mb-2"></div>
+            <script>
+              var elem = document.getElementById('post_raty3');
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  scoreName: 'star[star3]',
+                };
+                raty(elem,opt);
+            </script>
 
-              接客・サービス<div id="post_raty3" class="mb-2"></div>
-              <script>
-                var elem = document.getElementById('post_raty3');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star3]',
-                  };
-                  raty(elem,opt);
-              </script>
+            設備の充実<div id="post_raty4" class="mb-2"></div>
+            <script>
+              var elem = document.getElementById('post_raty4');
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  scoreName: 'star[star4]',
+                };
+                raty(elem,opt);
+            </script>
 
-              設備の充実<div id="post_raty4" class="mb-2"></div>
-              <script>
-                var elem = document.getElementById('post_raty4');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star4]',
-                  };
-                  raty(elem,opt);
-              </script>
+            周辺設備<div id="post_raty5" class="mb-2"></div>
+            <script>
+              var elem = document.getElementById('post_raty5');
+              var opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  half: true,
+                  scoreName: 'star[star5]',
+                };
+                raty(elem,opt);
+            </script>
+          </td>
+        </tr>
+      </table><!-- 星評価欄の閉じタグ -->
 
-              周辺設備<div id="post_raty5" class="mb-2"></div>
-              <script>
-                var elem = document.getElementById('post_raty5');
-                var opt = {
-                    starOn: "<%= asset_path('star-on.png') %>",
-                    starOff: "<%= asset_path('star-off.png') %>",
-                    starHalf: "<%= asset_path('star-half.png') %>",
-                    half: true,
-                    scoreName: 'star[star5]',
-                  };
-                  raty(elem,opt);
-              </script>
-            </td>
-          </tr>
-        </table><!-- 星評価欄の閉じタグ -->
-
-      　<div class="actions">
-          <%= f.submit "編集を保存", class: "btn btn-outline-primary mr-4" %>
-          <%= link_to "戻る", review_path(@review.id), class: 'btn btn-outline-dark mr-4' %>
-          <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger'  %>
-        </div>
-      <% end %> <!-- form_withのend -->
-    </div><!-- /col -->
-  </div> <!-- /row-->
+    　<div class="actions">
+        <%= f.submit "編集を保存", class: "btn btn-outline-primary mr-4" %>
+        <%= link_to "戻る", review_path(@review.id), class: 'btn btn-outline-dark mr-4' %>
+        <%= link_to "削除する", review_path(@review.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: 'btn btn-outline-danger'  %>
+      </div>
+    <% end %> <!-- form_withのend -->
+  </div><!-- /col -->
+</div> <!-- /row-->
