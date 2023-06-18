@@ -2,8 +2,8 @@
 
 <div class="col-md-8">
   <div class="d-flex justify-content-between mb-3">
-    <%= link_to "<< 戻る", user_path(@user.id) %>
-    <%= link_to "フォロワー一覧", user_followers_path(@user.id) %>
+    <%= link_to "<< 戻る", admin_user_path(@user.id) %>
+    <%= link_to "admin / フォロワー一覧", admin_user_followers_path(@user.id) %>
   </div>
   <h5 class="mb-4"><span class="h4 font-weight-bold"><%= @user.name %></span>のフォロー中リスト</h5>
 </div>
@@ -14,14 +14,14 @@
     <% @users.each do |user| %>
       <div class="d-flex mb-1">
         <div>
-          <%= link_to user_path(user.id), class: 'text-dark' do %>
+          <%= link_to admin_user_path(user.id), class: 'text-dark' do %>
             <%= image_tag user.get_user_image(70,70) %>
           <% end %>
         </div>
 
         <div>
-          <p><%= link_to "#{user.name}", user_path(user.id), class: 'text-dark' %></p>
-          <p><%= link_to "#{user.introduction}".truncate(25, omission: '...'), user_path(user.id), class: 'text-dark' %></p>
+          <p><%= link_to "#{user.name}", admin_user_path(user.id), class: 'text-dark' %></p>
+          <p><%= link_to "#{user.introduction}".truncate(25, omission: '...'), admin_user_path(user.id), class: 'text-dark' %></p>
         </div>
       </div>
     <% end %>
