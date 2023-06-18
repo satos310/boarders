@@ -1,38 +1,41 @@
-<div class="container">
-  <div class="row">
-    <h4>プロフィールを編集</h4>
-    <% if @user.errors.any? %>
-      <%= @user.errors.count %>errors prohibited this obj from being saved:
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+<!-- users/edit ユーザー編集 -->
 
-  <div class="row">
-    <%= form_with model: @user do |f| %>
-      <div class="form-group">
-        <lavel for="名前">Name</label>
-        <%= f.text_field :name, autofocus: true, id:"name", class: 'form-control name' %>
-      </div>
-
-      <div class="form-group">
-        <label for="user_Image">Image</label>
-        <%= f.file_field :user_image, accept: "image/*", class: "form-control-file user-image" %>
-      </div>
-
-      <div class="form-group">
-        <label for="user_introduction">Introduction</label>
-        <%= f.text_area :introduction, id:"introduction", class: 'form-control introduction' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit "Update User", class: 'btn btn-primary' %>
-      </div>
-
-      <%= link_to "退会する", user_unsubscribe_path(@user.id), class: 'btn btn-outline-danger btn-block' %>
-    <% end %>
-  </div><!-- /row -->
+<div class="col-md-7 mt-3 mb-4">
+  <h4>プロフィール情報を編集</h4>
+  <% if @user.errors.any? %>
+    <%= @user.errors.count %>errors prohibited this obj from being saved:
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
+
+<div class="col-md-7">
+  <%= form_with model: @user do |f| %>
+    <div class="form-group">
+      <lavel for="名前">ユーザーネーム</label>
+      <%= f.text_field :name, autofocus: true, id:"name", class: 'form-control name' %>
+    </div>
+
+    <div class="form-group">
+      <label for="user_Image">プロフィール画像</label>
+      <%= f.file_field :user_image, accept: "image/*", class: "form-control-file user-image" %>
+    </div>
+
+    <div class="form-group mb-5">
+      <label for="user_introduction">自己紹介</label>
+      <%= f.text_area :introduction, id:"introduction", class: 'form-control introduction' %>
+    </div>
+
+    <div class="d-flex">
+      <div class="form-group mr-5">
+        <%= f.submit "情報を更新", class: 'btn btn-outline-primary' %>
+      </div>
+      <div>
+        <%= link_to "退会する", user_unsubscribe_path(@user.id), class: 'btn btn-outline-dark' %>
+      </div>
+    </div>
+  <% end %>
+</div><!-- /col -->

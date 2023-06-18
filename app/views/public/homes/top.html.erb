@@ -1,6 +1,6 @@
 <!-- public/homes トップページ（投稿レビュー一覧） -->
 
-<div class="col-md-8 mx-auto mt-4 mb-2">
+<div class="col-md-8 mx-auto mt-3 mb-4">
   <%= form_with url: reviews_path, local: true, method: :get do |f| %>
     <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"35" %>
     <%= f.submit "検索" %>
@@ -39,8 +39,8 @@
 
         <!-- 投稿本文 -->
         <div class="mx-3">
-          <div class="mt-2 mb-1">
-            <h5 class="strong"><%= review.title %></h5>
+          <div class="mt-2">
+            <span class="font-weight-bold"><%= review.title %></span>
           </div>
           <!--タグリスト-->
           <div class="my-1">
@@ -48,7 +48,8 @@
               <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
             <% end %>
           </div>
-
+          
+          <!-- review_body -->
           <div class="my-1 mb-2">
             <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
             <label class="grad-btn text-muted" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
