@@ -1,5 +1,7 @@
 ja:
   activerecord:
+    models:
+      review: "レビュー"
     attributes:
       review:
         content: 文字数
@@ -7,16 +9,8 @@ ja:
         body: 投稿分
         hashtag: タグ
 
-ja:
-  activerecord:
-    attributes:
-      stars:
-        score: 星評価
-
-ja:
-  activerecord:
-    attributes:
       user:
         email: メールアドレス
         password: パスワード
         name: ユーザーネーム
+        

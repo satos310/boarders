@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   #follower_id=自分
   #follow_id=相手
- # 自分がフォローしたり、アンフォローしたりするための記述
+  # 自分がフォローしたり、アンフォローしたりするための記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
 
  # sourceは本当はfollow_idとなっていてカラム名を示している。

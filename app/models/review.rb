@@ -11,12 +11,23 @@ class Review < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 250 }
+  validate :check_stars
 
   def self.search(search)
     if search != ""
       Review.where(['title LIKE(?) OR body LIKE(?)', "%#{search}%", "%#{search}%"])
     else
       Review.includes(:user).order('created_at DESC')
+    end
+  end
+
+
+  def check_stars
+    invalid = stars.any? do |star|
+      star.score.nil?
+    end
+    if invalid
+      errors.add("レビューの星","が入力されていません。")
     end
   end
 

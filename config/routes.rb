@@ -46,7 +46,6 @@ Rails.application.routes.draw do
       member do
         get :pickups
       end
-      get 'friends'
       # フォロー機能はuserにネストさせている
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
