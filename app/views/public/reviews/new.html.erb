@@ -1,7 +1,7 @@
 <!-- public/review/new レビュー投稿ページ -->
+<%= render 'layouts/error_messages', model: @review %>
 
 <div class="col-md-7 mx-auto mt-5">
-  <%= render 'layouts/error_messages', model: @review %>
   <%= form_with model: @review, url: reviews_path, method: :post do |f| %>
     <table class="mb-4">
       <tr>

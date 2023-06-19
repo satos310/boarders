@@ -2,5 +2,21 @@ ja:
   activerecord:
     attributes:
       review:
-        stars: 星評価
         content: 文字数
+        title: タイトル
+        body: 投稿分
+        hashtag: タグ
+
+ja:
+  activerecord:
+    attributes:
+      stars:
+        score: 星評価
+
+ja:
+  activerecord:
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード
+        name: ユーザーネーム
