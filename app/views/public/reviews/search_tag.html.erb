@@ -54,9 +54,11 @@
         </div>
 
         <!--コメントフォーム-->
-        <div class="new-comment mb-1 mx-3">
-          <%= render 'public/comments/comment_form', review: review, comment: @comment %>
-        </div>
+        <% if admin_signed_in? %>
+          <div class="new-comment mb-1 mx-3">
+            <%= render 'public/comments/comment_form', review: review, comment: @comment %>
+          </div>
+        <% end %>
 
         <!--コメント一覧部分-->
         <div id="comments_area">

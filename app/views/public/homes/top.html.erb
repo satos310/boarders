@@ -48,7 +48,7 @@
               <%= link_to "##{list.name}", search_tag_path(hashtag_id: list.id) %>
             <% end %>
           </div>
-          
+
           <!-- review_body -->
           <div class="my-1 mb-2">
             <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
@@ -58,9 +58,11 @@
         </div>
 
         <!--コメントフォーム-->
-        <div class="new-comment mb-1 mx-3">
-          <%= render 'public/comments/comment_form', review: review, comment: @comment %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="new-comment mb-1 mx-3">
+            <%= render 'public/comments/comment_form', review: review, comment: @comment %>
+          </div>
+        <% end %>
 
         <!--コメント一覧部分-->
         <div id="comments_area">
