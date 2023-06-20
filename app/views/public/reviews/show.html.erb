@@ -50,18 +50,21 @@
         </div>
       <% end %>
 
-      <div class="new-comment mt-3">
-        <%= render 'public/comments/comment_form', review: @review, comment: @comment %>
+      <!--コメントフォーム-->
+      <% if user_signed_in? %>
+        <div class="new-comment mt-3">
+          <%= render 'public/comments/comment_form', review: @review, comment: @comment %>
+        </div>
+      <% end %>
+    </div>
+
+    <!--コメント一覧部分-->
+    <div class="col-md-5 pt-4">
+      <div id="comments_area">
+        <%= render 'public/comments/comments', review: @review %>
       </div>
     </div>
 
-    <!--コメントフォーム-->
-    <div class="col-md-5 pt-4">
-      <!--コメント一覧部分-->
-      <div id="comments_area">
-        <%= render 'public/comments/comments', review: @review %>
-      </div><!-- /comments_area -->
-    </div><!-- /col -->
   </div><!-- /col-10, offset-1 -->
 </div><!-- /row-->
 
