@@ -59,16 +59,18 @@
 
         <!--コメントフォーム-->
         <% if user_signed_in? %>
-          <div class="new-comment mb-1 mx-3">
+          <div class="new-comment mb-2 mx-3">
             <%= render 'public/comments/comment_form', review: review, comment: @comment %>
           </div>
         <% end %>
 
         <!--コメント一覧部分-->
-        <div id="comments_area">
+        <div id="comments_area" class="border-top pt-2 mx-3">
           <ul class="list_none">
             <% if review.comments.present? %>
-              <li>最新のコメント2件を表示</li>
+              <% if review.comments.length > 2 %>
+                <li>最新のコメント2件を表示</li>
+              <% end %>
             <% end %>
             <% review.comments.first(2). each do |comment| %>
               <li>
