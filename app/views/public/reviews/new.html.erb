@@ -1,18 +1,18 @@
 <!-- public/review/new レビュー投稿ページ -->
 <%= render 'layouts/error_messages', model: @review %>
 
-<div class="col-md-7 mx-auto mt-5">
+<div class="col-md-7 mx-auto mt-3">
   <%= form_with model: @review, url: reviews_path, method: :post do |f| %>
     <table class="mb-4">
-      <tr>
+      <!--<tr>-->
         <!--<th class="pr-4">レビュー種別</th>-->
-        <td class="my-2">
-          <%= f.radio_button :review_type, true %>
-          <%= f.label :review_type_true, "ロケーション" %>
-          <%= f.radio_button :review_type, false %>
-          <%= f.label :review_type_false, "アイテム" %>
-        </td>
-      </tr>
+        <!--<td class="my-2">-->
+          <%#= f.radio_button :review_type, true %>
+          <%#= f.label :review_type_true, "ロケーション" %>
+          <%#= f.radio_button :review_type, false %>
+          <%#= f.label :review_type_false, "アイテム" %>
+        <!--</td>-->
+      <!--</tr>-->
 
       <tr>
         <th>写真を追加</th>
