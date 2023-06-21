@@ -31,7 +31,7 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    
+
     # 星評価の項目指定
     @review.stars.build(name: "ゲレンデ", score: params[:star][:star])
     @review.stars.build(name: "コストパフォーマンス", score: params[:star][:star2])
@@ -40,7 +40,7 @@ class Public::ReviewsController < ApplicationController
     @review.stars.build(name: "周辺設備", score: params[:star][:star5])
 
     @review.user_id = current_user.id
-    
+
     # ハッシュタグ
     hashtag_list = []
     receive_hashtag_list=params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
@@ -53,10 +53,6 @@ class Public::ReviewsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def create_review
-
   end
 
   def index
@@ -84,11 +80,11 @@ class Public::ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
-    @review.stars.find_by(name: "ゲレンデ").update(score: params[:star][:star])
-    @review.stars.find_by(name: "コストパフォーマンス").update(score: params[:star][:star2])
-    @review.stars.find_by(name: "接客・サービス").update(score: params[:star][:star3])
-    @review.stars.find_by(name: "設備の充実").update(score: params[:star][:star4])
-    @review.stars.find_by(name: "周辺設備").update(score: params[:star][:star5])
+    @review.stars.find_by(name: "ゲレンデ").update(score: params[:star][:star]) if params[:star][:star].present?
+    @review.stars.find_by(name: "コストパフォーマンス").update(score: params[:star][:star2]) if params[:star][:star].present?
+    @review.stars.find_by(name: "接客・サービス").update(score: params[:star][:star3]) if params[:star][:star].present?
+    @review.stars.find_by(name: "設備の充実").update(score: params[:star][:star4]) if params[:star][:star].present?
+    @review.stars.find_by(name: "周辺設備").update(score: params[:star][:star5]) if params[:star][:star].present?
 
     # 入力されたタグを受け取る
     tag_list = params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank

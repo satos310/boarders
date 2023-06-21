@@ -11,7 +11,7 @@ class Review < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 50 }
   validates :body, presence: true, length: { maximum: 250 }
-  validate :check_stars
+  validate :check_stars_presence
 
   def self.search(search)
     if search != ""
@@ -21,13 +21,9 @@ class Review < ApplicationRecord
     end
   end
 
-
-  def check_stars
-    invalid = stars.any? do |star|
-      star.score.nil?
-    end
-    if invalid
-      errors.add("レビューの星","が入力されていません。")
+  def check_stars_presence
+    if stars.none? { |star| star.score.present? }
+      errors.add(:base, "レビューの星が入力されていません。")
     end
   end
 

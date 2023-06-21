@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # 追加
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: true, length: { maximum: 255 }
-  validates :password, presence: true, length: { maximum: 75 }
+  validates :password, length: { maximum: 75 }
 
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy

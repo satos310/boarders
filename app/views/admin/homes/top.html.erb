@@ -52,7 +52,7 @@
           <!-- review_body -->
           <div class="my-1 mb-2">
             <input id="trigger<%= review.id %>" class="grad-trigger" type="checkbox">
-            <label class="grad-btn text-muted" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
+            <label class="grad-btn" for="trigger<%= review.id %>" type="review_id">続きを読む</label>
             <div class="grad-item"><%= review.body %></div>
           </div>
         </div>
@@ -74,7 +74,7 @@
             <% if review.comments.present? %>
               <li>
                 <button type="button" class="button" data-toggle="modal" data-target="#exampleModalLong<%= review.id %>">
-                  <span class="text-secondary">...コメント<%= review.comments.count %>件を全て表示</span>
+                  <span class="text-secondary">コメント<%= review.comments.count %>件を全て表示</span>
                 </button>
               </li>
             <% end %>

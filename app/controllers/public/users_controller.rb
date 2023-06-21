@@ -16,6 +16,11 @@ class Public::UsersController < ApplicationController
   end
 
   def update
+    # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+    #   params[:user].delete(:password)
+    #   params[:user].delete(:password_confirmation)
+    # end
+    
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "You have updated user successfully."
