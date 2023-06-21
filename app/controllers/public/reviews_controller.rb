@@ -31,6 +31,7 @@ class Public::ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
+    
     # 星評価の項目指定
     @review.stars.build(name: "ゲレンデ", score: params[:star][:star])
     @review.stars.build(name: "コストパフォーマンス", score: params[:star][:star2])
@@ -39,6 +40,7 @@ class Public::ReviewsController < ApplicationController
     @review.stars.build(name: "周辺設備", score: params[:star][:star5])
 
     @review.user_id = current_user.id
+    
     # ハッシュタグ
     hashtag_list = []
     receive_hashtag_list=params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
