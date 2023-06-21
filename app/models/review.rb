@@ -23,7 +23,7 @@ class Review < ApplicationRecord
 
   def check_stars_presence
     if stars.none? { |star| star.score.present? }
-      errors.add(:base, "レビューの星が入力されていません。")
+      errors.add(:base, "レビューの星評価を入力してください。")
     end
   end
 

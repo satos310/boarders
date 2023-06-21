@@ -6,11 +6,10 @@ ja:
       review:
         content: 文字数
         title: タイトル
-        body: 投稿分
+        body: 投稿文
         hashtag: タグ
 
       user:
         email: メールアドレス
         password: パスワード
         name: ユーザーネーム
-        
