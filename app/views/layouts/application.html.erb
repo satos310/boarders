@@ -31,22 +31,22 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
-                      <%= link_to admin_homes_top_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to admin_homes_top_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-house pr-2 fa-lg"></i>ホーム
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to admin_reviews_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to admin_reviews_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-magnifying-glass pr-2 fa-lg"></i>投稿検索
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to admin_users_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to admin_users_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-users pr-2 fa-lg"></i>ユーザー一覧
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                      <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-dark my-1' do %>
                         <i class="fa-solid fa-arrow-right-from-bracket pr-2 fa-lg"></i>ログアウト
                       <% end %>
                     </li>
@@ -65,12 +65,12 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
-                      <%= link_to homes_top_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to homes_top_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-house pr-2 fa-lg"></i>ホーム
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-magnifying-glass pr-2 fa-lg"></i>トピック検索
                       <% end %>
                     </li>
@@ -80,22 +80,22 @@
                     <!--  <%# end %>-->
                     <!--</li>-->
                     <li class="nav-item">
-                      <%= link_to pickups_user_path(current_user.id), class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to pickups_user_path(current_user.id), class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-bookmark pr-2 fa-lg"></i>Pick Up
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to user_path(current_user.id), class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to user_path(current_user.id), class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-user pr-2 fa-lg"></i>プロフィール
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to new_review_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to new_review_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-regular fa-square-plus pr-2 fa-lg"></i>投稿する
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                      <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark my-1' do %>
                         <i class="fa-solid fa-arrow-right-from-bracket pr-2 fa-lg"></i>ログアウト
                       <% end %>
                     </li>
@@ -114,27 +114,27 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav ml-auto flex-column">
                     <li class="nav-item">
-                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to reviews_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-magnifying-glass pr-2 fa-lg"></i>トピック検索
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to new_user_registration_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to new_user_registration_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-user-plus pr-2 fa-lg"></i>新規登録
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to new_user_session_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to new_user_session_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fa-solid fa-right-to-bracket pr-2 fa-lg"></i>ログイン
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to homes_about_path, class: 'nav-link text-dark mr-3' do %>
+                      <%= link_to homes_about_path, class: 'nav-link text-dark mr-3 my-1' do %>
                         <i class="fas fa-book-open pr-2 fa-lg"></i>About
                       <% end %>
                     </li>
                     <li class="nav-item">
-                      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link", method: :post %>
+                      <%= link_to 'ゲストログイン', users_guest_sign_in_path, class: "nav-link my-1", method: :post %>
                     </li>
                   </ul>
                 </div>

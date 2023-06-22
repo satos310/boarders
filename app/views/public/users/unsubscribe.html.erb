@@ -6,8 +6,8 @@
     <h3 class="mb-5">本当に退会されますか？</h3>
 
     <div>
-      <%= link_to "　戻る　", :back, class: 'btn btn-outline-dark mr-5' %>
-      <%= link_to "削除する", user_path(@user.id), method: :delete, "data-confirm" => "最終確認 <本当に退会されますか？>", class: 'btn btn-outline-danger ml-3' %>
+      <%= link_to "　戻る　", user_path(@user.id), class: 'btn btn-outline-dark mr-5' %>
+      <%= link_to " 退会する ", user_path(@user.id), method: :delete, "data-confirm" => "最終確認 <本当に退会されますか？>", class: 'btn btn-outline-danger ml-3' %>
     </div>
   </div>
 </div>
