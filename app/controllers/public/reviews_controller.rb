@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def hashtag
     if params[:name].nil?
@@ -116,7 +117,11 @@ class Public::ReviewsController < ApplicationController
           .merge(user_id: current_user.id)
   end
 
-  # def star_params
-  #   params.require(:star).permit(:name, :score)
-  # end
+  # 他のユーザーからのアクセスを制限
+  def is_matching_login_user
+    review = Review.find(params[:id])
+    unless review.user == current_user  # レビューのユーザーと現在のログインユーザーを比較
+      redirect_to homes_top_path
+    end
+  end
 end

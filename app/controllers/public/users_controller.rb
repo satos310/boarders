@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :set_user, only: [:pickups]
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
@@ -8,11 +9,6 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user == current_user
-      render "edit"
-    else
-      redirect_to user_path(current_user)
-    end
   end
 
   def update
@@ -20,8 +16,7 @@ class Public::UsersController < ApplicationController
     #   params[:user].delete(:password)
     #   params[:user].delete(:password_confirmation)
     # end
-    
-    @user = User.find(params[:id])
+
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "You have updated user successfully."
     else
@@ -55,5 +50,13 @@ class Public::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  # 他のユーザーからのアクセスを制限
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to homes_top_path
+    end
   end
 end
