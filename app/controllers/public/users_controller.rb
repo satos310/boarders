@@ -12,10 +12,7 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    # if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-    #   params[:user].delete(:password)
-    #   params[:user].delete(:password_confirmation)
-    # end
+    set_user  # is_matching_login_userよりも先にset_userメソッドを先に呼び出す
 
     if @user.update(user_params)
       redirect_to user_path(@user.id), notice: "You have updated user successfully."
