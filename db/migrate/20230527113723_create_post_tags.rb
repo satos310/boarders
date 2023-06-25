@@ -1,8 +1,8 @@
 class CreatePostTags < ActiveRecord::Migration[6.1]
   def change
     create_table :post_tags do |t|
-      t.integer :review,   null: false
-      t.integer :hashtag,  null: false
+      t.integer :review_id,   null: false
+      t.integer :hashtag_id,  null: false
 
       t.timestamps
     end
