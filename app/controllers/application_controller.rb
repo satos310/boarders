@@ -18,9 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_admin!
-    if request.original_fullpath =~ /admin\/session/
-      redirect_to new_admin_session_path
-    else
+    unless request.original_fullpath =~ /admin\/session/
       redirect_to new_user_session_path
     end
   end
