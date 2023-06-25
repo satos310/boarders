@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def authenticate_admin!
     if controller_path.start_with?('admin/') && !admin_signed_in?
       redirect_to new_admin_session_path
-    elsif !devise_controller?
+    elsif !devise_controller? && !user_signed_in?
       redirect_to new_user_session_path
     end
   end
