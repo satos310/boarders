@@ -1,4 +1,5 @@
 class Admin::RelationshipsController < ApplicationController
+  before_action :authenticate_admin!
 
   # フォローフォロワー一覧処理
   def followings

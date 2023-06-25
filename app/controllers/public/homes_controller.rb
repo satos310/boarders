@@ -1,4 +1,5 @@
 class Public::HomesController < ApplicationController
+
   def search
     if params[:keyword].present?
       @reviews = Review.where('caption LIKE ?', "%#{params[:keyword]}%")

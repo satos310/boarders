@@ -1,4 +1,6 @@
 class Admin::ReviewsController < ApplicationController
+  before_action :authenticate_admin!
+
   def hashtag
     if params[:name].nil?
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.reviews.count}
