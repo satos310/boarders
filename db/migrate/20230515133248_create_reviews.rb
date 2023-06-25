@@ -1,9 +1,9 @@
 class CreateReviews < ActiveRecord::Migration[6.1]
   def change
     create_table :reviews do |t|
-      t.references :user,     null: false, foreign_key: true
-      t.string :title,        null: false, default: ""
-      t.string :body,         null: false, default: ""
+      t.integer :user,        null: false
+      t.string :title,        null: false
+      t.string :body,         null: false
       t.boolean :review_type, null: false, default: true
       t.timestamps
     end
