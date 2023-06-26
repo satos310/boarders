@@ -23,7 +23,7 @@
           </div>
 
           <%= link_to review_path(review.id) do %>
-            <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top' %>
+            <%= image_tag review.get_review_image(500,500), class: 'bd-placeholder-img card-img-top', style: 'width: 100%; height: 150px; object-fit: cover;' %>
           <% end %>
 
           <div class="d-flex mt-1">
