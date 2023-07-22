@@ -1,8 +1,8 @@
 <!-- admin/homes トップページ（投稿レビュー一覧） -->
 
-<div class="col-md-8 mx-auto mt-3 mb-4">
+<div class="col-10 mx-auto mb-4 align-items-center">
   <%= form_with url: admin_reviews_path, local: true, method: :get do |f| %>
-    <%= f.text_field :keyword, placeholder: "レビューを検索", :size=>"35" %>
+    <%= f.text_field :keyword, placeholder: "レビューを検索", class: 'col-md-7 mb-2' %>
     <%= f.submit "検索" %>
   <% end %>
 </div>
