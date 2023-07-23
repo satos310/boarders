@@ -143,8 +143,8 @@
           </header>
         </div><!-- /headerのcol -->
 
-        <div class="col-md-9 mx-auto">
-          <main class="border-left">
+        <div class="col-md-9 mx-auto border-left">
+          <main>
             <p class="notice"><%= notice %></p>
             <p class="alert"><%= alert %></p>
             <%= yield %>
@@ -157,7 +157,7 @@
 
 <style>
   @media screen and (max-width: 991px){
-    main.border-left {
+    div.border-left {
       border-left: none !important;
     }
   }
