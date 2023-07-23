@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -15,17 +17,17 @@ class User < ApplicationRecord
   has_many :pickuped_reviews, through: :pickups, source: :review
   # has_many :notifications, dependent: :destroy
 
-  #follower_id=自分
-  #follow_id=相手
+  # follower_id=自分
+  # follow_id=相手
   # 自分がフォローしたり、アンフォローしたりするための記述
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
 
- # sourceは本当はfollow_idとなっていてカラム名を示している。
- # フォロー一覧を表示するための記述
+  # sourceは本当はfollow_idとなっていてカラム名を示している。
+  # フォロー一覧を表示するための記述
   has_many :followings, through: :relationships, source: :follow
 
   has_many :reverse_relationships, class_name: "Relationship", foreign_key: "follow_id", dependent: :destroy
- # フォロワー一覧を表示するための記述
+  # フォロワー一覧を表示するための記述
   has_many :followers, through: :reverse_relationships, source: :follower
 
   def follow(user_id)
@@ -48,7 +50,7 @@ class User < ApplicationRecord
 
   # ゲストログイン機能で追加
   def self.guest
-    find_or_create_by!(email: 'guest@example.com') do |user|
+    find_or_create_by!(email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー"
       user.introduction = "ゲストユーザーです。"
@@ -81,8 +83,8 @@ class User < ApplicationRecord
 
   def get_user_image(width, height)
     unless user_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      user_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join("app/assets/images/no_image.jpg")
+      user_image.attach(io: File.open(file_path), filename: "default-image.jpg", content_type: "image/jpeg")
     end
     user_image.variant(resize_to_limit: [width, height]).processed
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Public::UsersController < ApplicationController
   before_action :set_user, only: [:pickups]
   before_action :is_matching_login_user, only: [:edit, :update]
@@ -39,21 +41,20 @@ class Public::UsersController < ApplicationController
   end
 
   private
-
-  def user_params
-    # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:user).permit(:name, :introduction, :user_image)
-  end
-
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  # 他のユーザーからのアクセスを制限
-  def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to homes_top_path
+    def user_params
+      # mergeメソッドでユーザーIDをStrongParameterに追加
+      params.require(:user).permit(:name, :introduction, :user_image)
     end
-  end
+
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # 他のユーザーからのアクセスを制限
+    def is_matching_login_user
+      user = User.find(params[:id])
+      unless user.id == current_user.id
+        redirect_to homes_top_path
+      end
+    end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Public::PickupsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :review_params, only: [:create, :destroy]
@@ -12,8 +14,7 @@ class Public::PickupsController < ApplicationController
   end
 
   private
-
-  def review_params
-    @review = Review.find(params[:review_id])
-  end
+    def review_params
+      @review = Review.find(params[:review_id])
+    end
 end

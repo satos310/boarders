@@ -1,58 +1,59 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: "public/registrations",
-    sessions: 'public/sessions'
+    sessions: "public/sessions"
   }
 
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+    post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
 
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
-  root to: 'public/homes#top'
+  root to: "public/homes#top"
 
   namespace :admin do
-    get 'homes/top' => 'homes#top'
+    get "homes/top" => "homes#top"
     resources :genres, only: [:index, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
     end
     resources :reviews, only: [:index, :show, :destroy]
-    get "search_tag"=>"reviews#search_tag"
+    get "search_tag" => "reviews#search_tag"
   end
 
   scope module: :public do
-    get 'homes/top'
-    get 'homes/about'
+    get "homes/top"
+    get "homes/about"
 
     resources :reviews, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :pickups, only: [:create, :destroy]
       resources :stars, only: [:create, :destroy]
-      get '/review/hashtag/:name' => 'reviews#hashtag'
-      get '/review/hashtag' => 'reviews#hashtag'
+      get "/review/hashtag/:name" => "reviews#hashtag"
+      get "/review/hashtag" => "reviews#hashtag"
       resources :comments, only: [:create, :destroy]
       collection do
-        get 'search'
+        get "search"
       end
     end
 
     resources :users, only: [:show, :edit, :update, :friends, :destroy] do
-      get 'unsubscribe'
+      get "unsubscribe"
       member do
         get :pickups
       end
       # フォロー機能はuserにネストさせている
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
     end
 
-    get "search_tag"=>"reviews#search_tag"
+    get "search_tag" => "reviews#search_tag"
     resources :follows, only: [:create, :destroy]
     resources :notifications, only: [:index]
   end

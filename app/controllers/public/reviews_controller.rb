@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 class Public::ReviewsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def hashtag
     if params[:name].nil?
-      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.reviews.count}
+      @hashtags = Hashtag.all.to_a.group_by { |hashtag| hashtag.reviews.count }
     else
       name = params[:name]
       name = name.downcase
       @hashtag = Hashtag.find_by(hashname: name)
       @review = @hashtag.reviews
-      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.reviews.count}
+      @hashtags = Hashtag.all.to_a.group_by { |hashtag| hashtag.reviews.count }
     end
   end
 
   def search_tag
-    #検索結果画面でもタグ一覧表示
+    # 検索結果画面でもタグ一覧表示
     @hashtags = Hashtag.all
-    #検索されたタグを受け取る
+    # 検索されたタグを受け取る
     @hashtag = Hashtag.find(params[:hashtag_id])
-    #検索されたタグに紐づく投稿を表示
+    # 検索されたタグに紐づく投稿を表示
     @reviews = @hashtag.reviews.page(params[:page]).per(10)
     @comment = Comment.new
   end
@@ -44,7 +46,7 @@ class Public::ReviewsController < ApplicationController
 
     # ハッシュタグ
     hashtag_list = []
-    receive_hashtag_list=params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
+    receive_hashtag_list = params[:review][:name].split(/[[:blank:]]+|,[[:blank:]]+/).compact_blank
     receive_hashtag_list.each do |tag_name|
       hashtag_list << tag_name.delete_prefix("#").delete_prefix("＃")
     end
@@ -71,7 +73,7 @@ class Public::ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id])
     @hashtags = @review.hashtags.all
-    @tag_list = @review.hashtags.pluck(:name).join(',')
+    @tag_list = @review.hashtags.pluck(:name).join(",")
     if @review.user == current_user
       render "edit"
     else
@@ -96,8 +98,8 @@ class Public::ReviewsController < ApplicationController
       @old_relations.each do |relation|
         relation.delete
       end
-       @review.save_hashtag(tag_list)
-      redirect_to review_path(@review.id), notice: '更新完了しました:)'
+      @review.save_hashtag(tag_list)
+      redirect_to review_path(@review.id), notice: "更新完了しました:)"
     else
       render :edit
     end
@@ -110,18 +112,17 @@ class Public::ReviewsController < ApplicationController
   end
 
   private
-
-  def review_params
-    # mergeメソッドでユーザーIDをStrongParameterに追加
-    params.require(:review).permit(:title, :body, :review_image, :star)
-          .merge(user_id: current_user.id)
-  end
-
-  # 他のユーザーからのアクセスを制限
-  def is_matching_login_user
-    review = Review.find(params[:id])
-    unless review.user == current_user  # レビューのユーザーと現在のログインユーザーを比較
-      redirect_to homes_top_path
+    def review_params
+      # mergeメソッドでユーザーIDをStrongParameterに追加
+      params.require(:review).permit(:title, :body, :review_image, :star)
+            .merge(user_id: current_user.id)
     end
-  end
+
+    # 他のユーザーからのアクセスを制限
+    def is_matching_login_user
+      review = Review.find(params[:id])
+      unless review.user == current_user  # レビューのユーザーと現在のログインユーザーを比較
+        redirect_to homes_top_path
+      end
+    end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails/all"
@@ -14,7 +16,7 @@ module Boarders
 
     # エラーメッセージを日本語化する際に追加
     config.i18n.default_locale = :ja
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.yml").to_s]
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -26,4 +28,3 @@ module Boarders
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Public::StarsController < ApplicationController
   before_action :authenticate_user!
 
@@ -10,7 +12,7 @@ class Public::StarsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     star = Star.find_by(user_id: current_user.id, review_id: params[:review_id])
     # 自分自身の評価のみ削除を許可
@@ -20,13 +22,12 @@ class Public::StarsController < ApplicationController
   end
 
   private
-
-  def star_params
-    # mergeメソッドでユーザーID, 投稿_IDをStrongParameterに追加
-    params.require(:star).permit(:star)
-          .merge(
-            user_id: current_user.id,
-            review_id: params[:review_id]
-          )
-  end
+    def star_params
+      # mergeメソッドでユーザーID, 投稿_IDをStrongParameterに追加
+      params.require(:star).permit(:star)
+            .merge(
+              user_id: current_user.id,
+              review_id: params[:review_id]
+            )
+    end
 end
